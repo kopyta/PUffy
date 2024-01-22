@@ -1,7 +1,7 @@
 # PUffy
 *Put a label on it*
 ## Welcome to PUffy! 🐡
-PUffy is a Python library designed for creating the best possible models given a dataset with **positive-unlabeled data**. It implements two-step classification approach. The package is also suitable for considerations on **PU classification** with fully labeled dataset, as the package presents labeling methods to artificially mimic labeling mechanisms resulting in positive-unlabeled data. Puffy consists of four modules, namely labelling_methods, rn_methods, training and pu_pipeline.
+PUffy is a Python library designed for creating the best possible models given a dataset with **positive-unlabeled data**. It implements two-step classification approach. The package is also suitable for considerations on **PU classification** with fully labeled dataset, as the package presents labeling methods to artificially mimic labeling mechanisms resulting in positive-unlabeled data. Puffy consists of four modules, namely `labelling_methods`, `rn_methods`, `training` and `pu_pipeline`.
 
 So far, it offers:
 
