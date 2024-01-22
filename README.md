@@ -6,18 +6,18 @@ PUffy is a Python library designed for creating the best possible models given a
 So far, it offers:
 
 - 4 labeling methods:
--- one method assuming SCAR scenario,
+   one method assuming SCAR scenario,
 
--- three methods being variants of SAR setting,
+  - three methods being variants of SAR setting,
 
 - 3 techniques for identifying reliable-negatives sample from the unlabeled data:
--- a technique based on KMeans,
-
--- a technique based on KNN,
-
--- a technique based on Spy analysis,
-
--- an iterative classification model for identifying reliable negatives, using Logistic Regression classification,
+  - a technique based on KMeans,
+  
+  - a technique based on KNN,
+  
+  - a technique based on Spy analysis,
+  
+  - an iterative classification model for identifying reliable negatives, using Logistic Regression classification,
 
 - visualizations of the model performance,
 
