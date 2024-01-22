@@ -1,0 +1,1185 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pu_pipeline &#8212; PUffy 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pu_pipeline';</script>
+    <link rel="canonical" href="https://kopyta.github.io/PUffy/pu_pipeline.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="training" href="training.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PUffy 1.0.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="labeling_methods.html">
+                        labelling_methods
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="rn_methods.html">
+                        rn_methods
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="training.html">
+                        training
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        pu_pipeline
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="labeling_methods.html">
+                        labelling_methods
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="rn_methods.html">
+                        rn_methods
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="training.html">
+                        training
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        pu_pipeline
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">pu_pipeline</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pu-pipeline">
+<h1>pu_pipeline<a class="headerlink" href="#pu-pipeline" title="Link to this heading">#</a></h1>
+<section id="pu-pipeline-processpipeline">
+<h2>pu_pipeline.ProcessPipeline<a class="headerlink" href="#pu-pipeline-processpipeline" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">ProcessPipeline</span></span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#ProcessPipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline" title="Link to this definition">#</a></dt>
+<dd><p>Class representing a pipeline for processing, training and evaluating a logistic regression model.</p>
+<dl class="simple">
+<dt>This class encapsulates tasks for performing a two-step classification of PU data, using:</dt><dd><ul class="simple">
+<li><p>sar and scar labelling,</p></li>
+<li><p>spy, knn and kmeans for identification of reliable negatives</p></li>
+<li><p>logistic regression as a classifier</p></li>
+<li><p>balanced accuracy and F1 score as evaluation metrics</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.X">
+<span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.X" title="Link to this definition">#</a></dt>
+<dd><p>Features of the training set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.y">
+<span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.y" title="Link to this definition">#</a></dt>
+<dd><p>Target variable of the training set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.Xtest">
+<span class="sig-name descname"><span class="pre">Xtest</span></span><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.Xtest" title="Link to this definition">#</a></dt>
+<dd><p>Features of the test set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.ytest">
+<span class="sig-name descname"><span class="pre">ytest</span></span><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.ytest" title="Link to this definition">#</a></dt>
+<dd><p>Target variable of the test set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="run-labelling">
+<h3>run_labelling<a class="headerlink" href="#run-labelling" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.run_labelling">
+<span class="sig-prename descclassname"><span class="pre">ProcessPipeline.</span></span><span class="sig-name descname"><span class="pre">run_labelling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#ProcessPipeline.run_labelling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.run_labelling" title="Link to this definition">#</a></dt>
+<dd><p>Run labelling methods to relabel certain positive instances as unlabeled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prob</strong> (<em>int</em>) – Probability with which positive samples are selected for the new labeling.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Tuple of arrays containing the new labels generated by SCAR and SAR methods.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>s_scar: np.array</dt><dd><p>Array of labels generated by the SCAR method.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>s_sar_sigma: np.array</dt><dd><p>Array of labels generated by the SAR method, with propensity score function being a logistic sigmoid function.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>s_sar_cauchy: np.array</dt><dd><p>Array of labels generated by the SAR method, with propensity score function being a CDF of Cauchy distribution.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>s_lr_sigma: np.array</dt><dd><p>Array of labels generated by the SAR method, with propensity score function being a logistic sigmoid function combined with logistic regression’s coefficients.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.array, np.array, np.array, np.array]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">ProcessPipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_scar</span><span class="p">,</span> <span class="n">s_sar_sigma</span><span class="p">,</span> <span class="n">s_lr_sigma</span><span class="p">,</span> <span class="n">s_sar_cauchy</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_labelling</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after SCAR: </span><span class="si">{</span><span class="n">s_scar</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after SAR (sigmoid logistic function): </span><span class="si">{</span><span class="n">s_sar_sigma</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after SAR (CDF Cauchy): </span><span class="si">{</span><span class="n">s_sar_cauchy</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after SAR (sigmoid lf + logistic regression): </span><span class="si">{</span><span class="n">s_lr_sigma</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">Fraction is 1.0</span>
+<span class="go">a = -8.0</span>
+<span class="go">Fraction is 0.993006993006993</span>
+<span class="go">a = -6.850000000000004</span>
+<span class="go">Fraction is 0.9020979020979021</span>
+<span class="go">a = -0.5000000000000266</span>
+</pre></div>
+</div>
+<p>Last 10 labels before: [0, 0, 1, 0, 1, 1, 1, 1, 0, 1]
+Last 10 labels after SCAR: [0 0 1 0 1 1 1 1 0 0]
+Last 10 labels after SAR (sigmoid logistic function): [0. 0. 1. 0. 1. 1. 1. 1. 0. 1.]
+Last 10 labels after SAR (CDF Cauchy): [0. 0. 1. 0. 1. 1. 1. 1. 0. 1.]
+Last 10 labels after SAR (sigmoid lf + logistic regression ): [0. 0. 0. 0. 1. 1. 1. 1. 0. 1.]</p>
+</dd></dl>
+
+</section>
+<section id="run-rn-methods">
+<h3>run_rn_methods<a class="headerlink" href="#run-rn-methods" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.run_rn_methods">
+<span class="sig-prename descclassname"><span class="pre">ProcessPipeline.</span></span><span class="sig-name descname"><span class="pre">run_rn_methods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rn_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#ProcessPipeline.run_rn_methods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.run_rn_methods" title="Link to this definition">#</a></dt>
+<dd><p>Run reliable negatives identification methods (first step of the two-step methods) based on the specified type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable of labeled positives.</p></li>
+<li><p><strong>rn_type</strong> (<em>str</em>) – Type of method for identifying reliable negatives (‘spy’, ‘knn’, ‘kmeans’).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>A tuple of DataFrames representing the reliable negatives and partitions.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>rn: DataFrame</dt><dd><p>DataFrame representing reliable negatives.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>p: DataFrame</dt><dd><p>DataFrame representing labeled positives.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>u: DataFrame</dt><dd><p>DataFrame representing unlabeled instances.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">ProcessPipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_rn_methods</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;spy&#39;</span><span class="p">)</span>
+<span class="go">Fraction is 0.8986013986013986</span>
+<span class="go">a = -0.5000000000000266</span>
+<span class="go">SPY</span>
+<span class="go">Treshhold is 0.1457053196376031</span>
+<span class="go">SPY: There were found 159 reliable negatives from 198.0 unlabeled instances</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="oracle-naive-method-result">
+<h2>oracle_naive_method_result<a class="headerlink" href="#oracle-naive-method-result" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.oracle_naive_method_result">
+<span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">oracle_naive_method_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pu_process</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#oracle_naive_method_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.oracle_naive_method_result" title="Link to this definition">#</a></dt>
+<dd><p>Compute performance metrics for the Oracle or Naive method.</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>pu_process<span class="classifier">ProcessPipeline</span></dt><dd><p>An instance of the Positive-Unlabeled learning pipeline containing training and testing data.</p>
+</dd>
+<dt>type<span class="classifier">str</span></dt><dd><p>The type of method to compute results for. Should be either “ORACLE” or “NAIVE”.</p>
+</dd>
+<dt>s_array<span class="classifier">np.array or None</span></dt><dd><p>Indicator variable of labeled positives.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>list[float, float, float]</dt><dd><p>A list containing the computed Balanced Accuracy, F1 Score, and elapsed time for the specified method.</p>
+</dd>
+</dl>
+</section>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">ProcessPipeline</span><span class="p">,</span> <span class="n">oracle_naive_method_result</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">process</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_scar</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">run_labelling</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oracle</span> <span class="o">=</span> <span class="n">oracle_naive_method_result</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="s2">&quot;ORACLE&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">naive</span> <span class="o">=</span> <span class="n">oracle_naive_method_result</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="s2">&quot;NAIVE&quot;</span><span class="p">,</span> <span class="n">s_scar</span><span class="p">)</span>
+<span class="go">Fraction is 1.0</span>
+<span class="go">a = -8.0</span>
+<span class="go">Fraction is 0.993006993006993</span>
+<span class="go">a = 3.0499999999999616</span>
+<span class="go">Fraction is 0.8986013986013986</span>
+<span class="go">a = -0.400000000000027</span>
+<span class="go">ORACLE METHOD: balanced accuracy: 0.9464461185718964, f1 score: 0.9655172413793103, run time: 0.016235828399658203</span>
+<span class="go">NAIVE METHOD: balanced accuracy: 0.9439895185063871, f1 score: 0.9577464788732394, run time: 0.01611614227294922</span>
+</pre></div>
+</div>
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pu_process</strong> (<a class="reference internal" href="#puffy.pu_pipeline.ProcessPipeline" title="puffy.pu_pipeline.ProcessPipeline"><em>ProcessPipeline</em></a>) – </p></li>
+<li><p><strong>type</strong> (<em>str</em>) – </p></li>
+<li><p><strong>s_array</strong> (<em>array</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float, float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="run-training">
+<h3>run_training<a class="headerlink" href="#run-training" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.run_training">
+<span class="sig-prename descclassname"><span class="pre">ProcessPipeline.</span></span><span class="sig-name descname"><span class="pre">run_training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#ProcessPipeline.run_training"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.run_training" title="Link to this definition">#</a></dt>
+<dd><p>Train a logistic regression model using the processed data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rn</strong> (<em>DataFrame</em>) – DataFrame representing reliable negatives.</p></li>
+<li><p><strong>p</strong> (<em>DataFrame</em>) – DataFrame representing labeled positives.</p></li>
+<li><p><strong>u</strong> (<em>DataFrame</em>) – DataFrame representing unlabeled instances.</p></li>
+<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable of labeled positives.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trained logistic regression model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LogisticRegression</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">ProcessPipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_rn_methods</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;spy&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_training</span><span class="p">(</span><span class="n">rn</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
+<span class="go">Fraction is 0.8986013986013986</span>
+<span class="go">a = -0.5000000000000266</span>
+<span class="go">SPY</span>
+<span class="go">Treshhold is 0.1457053196376031</span>
+<span class="go">SPY: There were found 159 reliable negatives from 198.0 unlabeled instances</span>
+<span class="go">Start iterative training of logistic regression model.</span>
+<span class="go">Stopping</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="run-metrics">
+<h3>run_metrics<a class="headerlink" href="#run-metrics" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.ProcessPipeline.run_metrics">
+<span class="sig-prename descclassname"><span class="pre">ProcessPipeline.</span></span><span class="sig-name descname"><span class="pre">run_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#ProcessPipeline.run_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.ProcessPipeline.run_metrics" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the trained model using balanced accuracy and F1 score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>LogisticRegression</em>) – Trained logistic regression model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>A tuple of floats representing balanced accuracy and F1 score.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>b: float</dt><dd><p>Balanced accuracy score.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>f: float</dt><dd><p>F1 score.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[float, float]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">ProcessPipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_rn_methods</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;spy&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_training</span><span class="p">(</span><span class="n">rn</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="p">,</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run_metrics</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Achieved balanced accuracy: </span><span class="si">{</span><span class="n">ba</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Achieved F1 score: </span><span class="si">{</span><span class="n">f1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">Fraction is 0.8986013986013986</span>
+<span class="go">a = -0.5000000000000266</span>
+<span class="go">SPY</span>
+<span class="go">Treshhold is 0.1457053196376031</span>
+<span class="go">SPY: There were found 159 reliable negatives from 198.0 unlabeled instances</span>
+<span class="go">Start iterative training of logistic regression model.</span>
+<span class="go">Stopping</span>
+<span class="go">Achived balanced accuracy: 0.9394038650507697</span>
+<span class="go">Achived F1 score: 0.9583333333333334</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="launch">
+<h2>launch<a class="headerlink" href="#launch" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.launch">
+<span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">launch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xtest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ytest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#launch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.launch" title="Link to this definition">#</a></dt>
+<dd><p>Launch the entire pipeline, including  various labelling, various identification of reliable negatives methods,
+training methods and evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features of the training set.</p></li>
+<li><p><strong>y</strong> (<em>pd.DataFrame</em>) – Target variable of the training set.</p></li>
+<li><p><strong>Xtest</strong> (<em>pd.DataFrame</em>) – Features of the test set.</p></li>
+<li><p><strong>ytest</strong> (<em>pd.DataFrame</em>) – Target variable of the test set.</p></li>
+<li><p><strong>prob</strong> (<em>int</em>) – Probability with which positive samples are selected for the new labels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.DataFrame</em> – Dataframe containing the results of the entire process.</p></li>
+<li><p><em>Example</em></p></li>
+<li><p><em>———</em></p></li>
+<li><p><em>&gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline, launch</em></p></li>
+<li><p><em>&gt;&gt;&gt; from sklearn.model_selection import train_test_split</em></p></li>
+<li><p><em>&gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</em></p></li>
+<li><p><em>&gt;&gt;&gt;</em></p></li>
+<li><p><em>&gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</em></p></li>
+<li><p><em>&gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</em></p></li>
+<li><p><em>&gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</em></p></li>
+<li><p><em>&gt;&gt;&gt;</em></p></li>
+<li><p><em>&gt;&gt;&gt; results = launch(X_train, y_train, X_test, y_test, 0.8)</em></p></li>
+<li><p><em>&gt;&gt;&gt; results</em></p></li>
+<li><p><em># A dataframe of the results is displayed (here presenting only a part of it)</em> –          SAR_CAUCHY
+Balanced accuracy  F1 score       time</p></li>
+<li><p><em>Oracle methods                 0.946446  0.965517   0.054124</em></p></li>
+<li><p><em>Naive method                   0.958074  0.972222   0.031616</em></p></li>
+<li><p><em>Spy + LR                       0.958074  0.972222   0.583345</em></p></li>
+<li><p><em>Spy + Iterative LR             0.934818  0.958904   0.637402</em></p></li>
+<li><p><em>KNN + LR                       0.767442  0.876543   0.077034</em></p></li>
+<li><p><em>KNN + Iterative LR             0.895349  0.940397   0.278719</em></p></li>
+<li><p><em>Kmeans + LR                    0.883721  0.934211  29.737121</em></p></li>
+<li><p><em>Kmeans + Iterative LR          0.895349  0.940397  29.851906</em></p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>DataFrame</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="count-results">
+<h2>count_results<a class="headerlink" href="#count-results" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.count_results">
+<span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">count_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#count_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.count_results" title="Link to this definition">#</a></dt>
+<dd><p>Counts and prints results for multiple experiments with different test splits and label frequencies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_X</strong> (<em>pd.DataFrame</em>) – Features.</p></li>
+<li><p><strong>df_y</strong> (<em>pd.DataFrame</em>) – Target variable.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em>) – Size of the test set (value from 0 to 1).</p></li>
+<li><p><strong>test_num</strong> (<em>int</em>) – Number of experiments.</p></li>
+<li><p><strong>prob</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – List of label frequencies.</p></li>
+<li><p><strong>flag</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If False, each DataFrame contains mean results, if True  each DataFrame contains mean and standard deviation of the results of each method.</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>--------</strong> – </p></li>
+<li><p><strong>tuple</strong> – A tuple containing DataFrames with the results of each method for different label frequencies. Each DataFrame contains aggregated results (mean and optional standard deviation if ‘flag’ is True).</p></li>
+<li><p><strong>Example</strong> – </p></li>
+<li><p><strong>---------</strong> – </p></li>
+<li><p><strong>count_results</strong> (<em>&gt;&gt;&gt; from puffy.pu_pipeline import</em>) – </p></li>
+<li><p><strong>plot_performance</strong> – </p></li>
+<li><p><strong>load_breast_cancer</strong> (<em>&gt;&gt;&gt; from sklearn.datasets import</em>) – </p></li>
+<li><p><strong>&gt;&gt;&gt;</strong> – </p></li>
+<li><p><strong>X</strong> (<em>&gt;&gt;&gt;</em>) – </p></li>
+<li><p><strong>load_breast_cancer</strong><strong>(</strong><strong>as_frame=True</strong> (<em>y =</em>) – </p></li>
+<li><p><strong>return_X_y=True</strong><strong>)</strong> – </p></li>
+<li><p><strong>count_results</strong><strong>(</strong><strong>X</strong> (<em>&gt;&gt;&gt; result_counts =</em>) – </p></li>
+<li><p><strong>y</strong> – </p></li>
+<li><p><strong>0.3</strong> – </p></li>
+<li><p><strong>2</strong> – </p></li>
+<li><p><strong>[</strong><strong>0.3</strong> – </p></li>
+<li><p><strong>0.6</strong> – </p></li>
+<li><p><strong>0.9</strong><strong>]</strong><strong>)</strong> – </p></li>
+<li><p><strong>frequency.</strong> (<em># result_counts is a tuple containing DataFrames with aggregated results for each label</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tuple</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="count-results-without-splitting-dataset">
+<h2>count_results_without_splitting_dataset<a class="headerlink" href="#count-results-without-splitting-dataset" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.count_results_without_splitting_dataset">
+<span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">count_results_without_splitting_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_Xtest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_ytest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#count_results_without_splitting_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.count_results_without_splitting_dataset" title="Link to this definition">#</a></dt>
+<dd><p>Counts and prints results for multiple experiments without splitting the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_X</strong> (<em>pd.DataFrame</em>) – Features of the training set.</p></li>
+<li><p><strong>df_y</strong> (<em>pd.DataFrame</em>) – Target variable of the training set.</p></li>
+<li><p><strong>df_Xtest</strong> (<em>pd.DataFrame</em>) – Features for the test set.</p></li>
+<li><p><strong>df_ytest</strong> (<em>pd.DataFrame</em>) – Target variable for the test set.</p></li>
+<li><p><strong>test_num</strong> (<em>int</em>) – Number of experiments.</p></li>
+<li><p><strong>prob</strong> (<em>list</em><em>[</em><em>Float</em><em>]</em>) – List of label frequencies.</p></li>
+<li><p><strong>flag</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If False, each DataFrame contains mean results, if True  each DataFrame contains mean and standard deviation of the results of each method.</p></li>
+<li><p><strong>Returns</strong> – </p></li>
+<li><p><strong>--------</strong> – </p></li>
+<li><p><strong>tuple</strong> – A tuple containing DataFrames with the results of each method for different label frequencies. Each DataFrame contains aggregated results (mean and optional standard deviation if ‘flag’ is True).</p></li>
+<li><p><strong>Example</strong> – </p></li>
+<li><p><strong>---------</strong> – </p></li>
+<li><p><strong>ProcessPipeline</strong> (<em>&gt;&gt;&gt; from puffy.pu_pipeline import</em>) – </p></li>
+<li><p><strong>count_results_without_splitting_dataset</strong> – </p></li>
+<li><p><strong>train_test_split</strong> (<em>&gt;&gt;&gt; from sklearn.model_selection import</em>) – </p></li>
+<li><p><strong>load_breast_cancer</strong> (<em>&gt;&gt;&gt; from sklearn.datasets import</em>) – </p></li>
+<li><p><strong>&gt;&gt;&gt;</strong> – </p></li>
+<li><p><strong>X</strong> (<em>&gt;&gt;&gt;</em>) – </p></li>
+<li><p><strong>load_breast_cancer</strong><strong>(</strong><strong>as_frame=True</strong> (<em>y =</em>) – </p></li>
+<li><p><strong>return_X_y=True</strong><strong>)</strong> – </p></li>
+<li><p><strong>X_train</strong> (<em>&gt;&gt;&gt;</em>) – </p></li>
+<li><p><strong>X_test</strong> – </p></li>
+<li><p><strong>y_train</strong> – </p></li>
+<li><p><strong>train_test_split</strong><strong>(</strong><strong>X</strong> (<em>y_test =</em>) – </p></li>
+<li><p><strong>y</strong> – </p></li>
+<li><p><strong>test_size=0.2</strong> – </p></li>
+<li><p><strong>random_state=42</strong><strong>)</strong> – </p></li>
+<li><p><strong>X_train</strong> – </p></li>
+<li><p><strong>X_test</strong> – </p></li>
+<li><p><strong>y_train</strong> – </p></li>
+<li><p><strong>y_test</strong> – </p></li>
+<li><p><strong>X</strong> – </p></li>
+<li><p><strong>[</strong><strong>X_train</strong> (<em>y =</em><em> [</em><em>df.reset_index</em><em>(</em><em>drop=True</em><em>) </em><em>for df in</em>) – </p></li>
+<li><p><strong>X_test</strong> – </p></li>
+<li><p><strong>y_train</strong> – </p></li>
+<li><p><strong>y_test</strong> – </p></li>
+<li><p><strong>X</strong> – </p></li>
+<li><p><strong>y</strong><strong>]</strong><strong>]</strong> – </p></li>
+<li><p><strong>&gt;&gt;&gt;</strong> – </p></li>
+<li><p><strong>count_results_without_splitting_dataset</strong><strong>(</strong><strong>X_train</strong> (<em>&gt;&gt;&gt;</em>) – </p></li>
+<li><p><strong>y_train</strong> – </p></li>
+<li><p><strong>X_test</strong> – </p></li>
+<li><p><strong>y_test</strong> – </p></li>
+<li><p><strong>1</strong> – </p></li>
+<li><p><strong>[</strong><strong>0.5</strong> – </p></li>
+<li><p><strong>0.9</strong><strong>]</strong><strong>)</strong> – </p></li>
+<li><p><strong>frequency.</strong> (<em># Returns a tuple containing DataFrames with aggregated results for each label</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tuple</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="create-result-df">
+<h2>create_result_df<a class="headerlink" href="#create-result-df" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.create_result_df">
+<span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">create_result_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_frames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#create_result_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.create_result_df" title="Link to this definition">#</a></dt>
+<dd><p>Combine and structure results from different scenarios into a summary DataFrame.</p>
+<section id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>data_frames<span class="classifier">list of pandas.DataFrame</span></dt><dd><p>A list containing four DataFrames with results for different scenarios. Each DataFrame should have columns ‘Balanced accuracy’, ‘F1 score’, and ‘time’.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>pd.DataFrame</dt><dd><p>A summary DataFrame containing the merged results for each scenario. The columns have a multi-level index with the first level representing the scenario (‘SCAR’, ‘SAR_SIGMA’, ‘SAR_LR_SIGMA’, ‘SAR_CAUCHY’) and the second level representing the metric (‘Balanced accuracy’, ‘F1 score’, ‘time’).</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">ProcessPipeline</span><span class="p">,</span> <span class="n">rn_method_result</span><span class="p">,</span> <span class="n">create_result_df</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">process</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labelings</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">run_labelling</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">labelings</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">df_s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rn_method_result</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Balanced accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;F1 score&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Kmeans + LR&#39;</span><span class="p">,</span> <span class="s1">&#39;Kmeans + Iterative LR&#39;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_s</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_result_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go"># The function will display the summary table.</span>
+</pre></div>
+</div>
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_frames</strong> (<em>list</em><em>[</em><em>DataFrame</em><em>, </em><em>DataFrame</em><em>, </em><em>DataFrame</em><em>, </em><em>DataFrame</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>DataFrame</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rn-method-result">
+<h2>rn_method_result<a class="headerlink" href="#rn-method-result" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.rn_method_result">
+<span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">rn_method_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pu_process</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rn_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#rn_method_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.rn_method_result" title="Link to this definition">#</a></dt>
+<dd><p>Compute performance metrics for a two-step method for positive-unlabeled data.</p>
+<section id="id3">
+<h3>Parameters:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>pu_process<span class="classifier">ProcessPipeline</span></dt><dd><p>An instance of the Positive-Unlabeled learning pipeline containing training and testing data.</p>
+</dd>
+<dt>rn_type<span class="classifier">str</span></dt><dd><p>The type of the two-step method to use. Options:’knn’, ‘kmeans’, ‘spy’.</p>
+</dd>
+<dt>s_array<span class="classifier">np.array</span></dt><dd><p>Indicator variable of labeled positives.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Returns:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>list[list[float, float, float], list[float, float, float]]</dt><dd><p>A list containing two sublists. Each sublist represents the performance metrics (Balanced Accuracy, F1 Score, Elapsed Time) for the simple and iterative versions of the RN method, respectively.</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h3>Example:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">ProcessPipeline</span><span class="p">,</span> <span class="n">rn_method_result</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">process</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_scar</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">run_labelling</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">rn_method_result</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="s1">&#39;knn&#39;</span><span class="p">,</span> <span class="n">s_scar</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span>
+<span class="go">Fraction is 1.0</span>
+<span class="go">a = -8.0</span>
+<span class="go">Fraction is 0.993006993006993</span>
+<span class="go">a = -6.550000000000005</span>
+<span class="go">Fraction is 0.8986013986013986</span>
+<span class="go">a = -0.950000000000025</span>
+<span class="go">KNN</span>
+<span class="go">KNN: There were found 39 reliable negatives from 193 unlabeled instances</span>
+<span class="go">Start iterative training of logistic regression model.</span>
+<span class="go">Stopping</span>
+<span class="go">[[0.6976744186046512, 0.8452380952380951, 0.11298465728759766],</span>
+<span class="go">[0.8953488372093024, 0.9403973509933775, 0.3631479740142822]]</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+<section id="plot-performance">
+<h2>plot_performance<a class="headerlink" href="#plot-performance" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="puffy.pu_pipeline.plot_performance">
+<span class="sig-prename descclassname"><span class="pre">puffy.pu_pipeline.</span></span><span class="sig-name descname"><span class="pre">plot_performance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mechanism</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/pu_pipeline.html#plot_performance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.pu_pipeline.plot_performance" title="Link to this definition">#</a></dt>
+<dd><p>Plots the performance of different methods given performance results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>results</strong> (<em>list</em><em>[</em><em>pd.DataFrame</em><em>]</em>) – List of DataFrames containing performance results.</p></li>
+<li><p><strong>c_seq</strong> (<em>np.ndarray</em>) – Label frequency sequence.</p></li>
+<li><p><strong>metrics</strong> (<em>str</em>) – Metric to plot, possible values: ‘Balanced accuracy’, ‘F1 score’.</p></li>
+<li><p><strong>mechanism</strong> (<em>str</em>) – Labeling mechanism assumption, possible values: ‘SCAR’, ‘SAR’.</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Dataset name.</p></li>
+<li><p><strong>iterative</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, removes iterative LR methods from the plot. Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Works with functions puffy.pu_pipeline.count_results_without_splitting_dataset</p>
+<p>and puffy.pu_pipeline.count_results, if the ‘flag’ is True.</p>
+<p>Shows a plot of method’s performaces</p>
+<section id="id6">
+<h3>Example:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.pu_pipeline</span> <span class="kn">import</span> <span class="n">count_results</span><span class="p">,</span> <span class="n">plot_performance</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result_counts</span> <span class="o">=</span> <span class="n">count_results</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span><span class="n">flag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot_performance</span><span class="p">(</span><span class="n">result_counts</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span>
+<span class="go"># Plots the methods&#39; performance</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="training.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">training</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pu-pipeline-processpipeline">pu_pipeline.ProcessPipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.X"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.X</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.y"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.y</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.Xtest"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.Xtest</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.ytest"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.ytest</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-labelling">run_labelling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.run_labelling"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.run_labelling()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-rn-methods">run_rn_methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.run_rn_methods"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.run_rn_methods()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oracle-naive-method-result">oracle_naive_method_result</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.oracle_naive_method_result"><code class="docutils literal notranslate"><span class="pre">oracle_naive_method_result()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">run_training</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.run_training"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.run_training()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-metrics">run_metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.ProcessPipeline.run_metrics"><code class="docutils literal notranslate"><span class="pre">ProcessPipeline.run_metrics()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch">launch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.launch"><code class="docutils literal notranslate"><span class="pre">launch()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#count-results">count_results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.count_results"><code class="docutils literal notranslate"><span class="pre">count_results()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#count-results-without-splitting-dataset">count_results_without_splitting_dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.count_results_without_splitting_dataset"><code class="docutils literal notranslate"><span class="pre">count_results_without_splitting_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-result-df">create_result_df</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.create_result_df"><code class="docutils literal notranslate"><span class="pre">create_result_df()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rn-method-result">rn_method_result</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.rn_method_result"><code class="docutils literal notranslate"><span class="pre">rn_method_result()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">plot_performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.pu_pipeline.plot_performance"><code class="docutils literal notranslate"><span class="pre">plot_performance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Agata Kopyt, Zuzanna Kotlińska, Nikola Miszalska.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

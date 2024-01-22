@@ -1,0 +1,24 @@
+labelling_methods 
+----------------------------------------------------------------------------------------------------
+labelling_methods.LabellingMethods 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autoclass:: puffy.labelling_methods.LabellingMethods
+   :exclude-members: __init__,__new__
+
+scar
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: puffy.labelling_methods.LabellingMethods.scar
+
+sar_sigmoid
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: puffy.labelling_methods.LabellingMethods.sar_sigmoid
+
+sar_cauchy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: puffy.labelling_methods.LabellingMethods.sar_cauchy
+
+sar_lr_sigmoid
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automethod:: puffy.labelling_methods.LabellingMethods.sar_lr_sigmoid
+
+

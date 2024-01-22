@@ -1,0 +1,43 @@
+.. puffy package
+.. =============
+
+
+.. puffy.labelling\_methods module
+.. -------------------------------
+
+.. .. automodule:: puffy.labelling_methods
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
+
+.. puffy.pu\_pipeline module
+.. -------------------------
+
+.. .. automodule:: puffy.pu_pipeline
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
+
+.. puffy.rn\_methods module
+.. ------------------------
+
+.. .. automodule:: puffy.rn_methods
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
+
+.. puffy.training module
+.. ---------------------
+
+.. .. automodule:: puffy.training
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
+
+.. Module contents
+.. ---------------
+
+.. .. automodule:: puffy
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
