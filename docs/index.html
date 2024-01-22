@@ -318,11 +318,8 @@ document.write(`
   <section id="put-a-label-on-it">
 <h1><em>Put a label on it!</em><a class="headerlink" href="#put-a-label-on-it" title="Link to this heading">#</a></h1>
 <section id="welcome-to-puffy-s-documentation">
-<h2>Welcome to PUffy’s documentation!<a class="headerlink" href="#welcome-to-puffy-s-documentation" title="Link to this heading">#</a></h2>
-<p>PUffy is a Python library designed for creating the best possible models given a dataset with positive-unlabeled data.
-It implements two-step classification approach. The package is also suitable for considerations on PU classification with fully labeled dataset,
-as the package presents labeling methods to artificially mimic labeling mechanisms resulting in positive-unlabeled data.
-Puffy consists of four modules, namely labelling_methods, rn_methods, training and pu_pipeline.</p>
+<h2>Welcome to PUffy’s Documentation!🐡<a class="headerlink" href="#welcome-to-puffy-s-documentation" title="Link to this heading">#</a></h2>
+<p>PUffy is a Python library designed for creating the best possible models given a dataset with positive-unlabeled data. It implements a two-step classification approach. The package is also suitable for considerations on PU classification with a fully labeled dataset, as the package presents labeling methods to artificially mimic labeling mechanisms resulting in positive-unlabeled data. Puffy consists of four modules: <cite>labelling_methods</cite>, <cite>rn_methods</cite>, <cite>training</cite>, and <cite>pu_pipeline</cite>.</p>
 <p>So far, it offers:</p>
 <ul class="simple">
 <li><dl class="simple">
@@ -334,7 +331,7 @@ Puffy consists of four modules, namely labelling_methods, rn_methods, training a
 </dl>
 </li>
 <li><dl class="simple">
-<dt>3 techniques for identifying reliable-negatives sample from the unlabeled data:</dt><dd><ul>
+<dt>3 techniques for identifying reliable-negative samples from the unlabeled data:</dt><dd><ul>
 <li><p>a technique based on KMeans,</p></li>
 <li><p>a technique based on KNN,</p></li>
 <li><p>a technique based on Spy analysis,</p></li>
@@ -350,7 +347,7 @@ Puffy consists of four modules, namely labelling_methods, rn_methods, training a
 <p>As of today, the package is meant for binary classification problems.</p>
 </section>
 <section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h2>
+<h2>Contents🐡<a class="headerlink" href="#contents" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="labeling_methods.html">labelling_methods</a></li>
@@ -360,11 +357,48 @@ Puffy consists of four modules, namely labelling_methods, rn_methods, training a
 </ul>
 </div>
 </section>
-<section id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h2>
+<section id="user-guide">
+<h2>User Guide🐡<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h2>
+<p>Thank you for choosing Puffy! This section provides instructions on how to install and set up PUffy on your system.
+For all the source codes visit: <a class="reference external" href="https://github.com/kopyta/PUffy/src">GitHub</a></p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<section id="prerequisites">
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<p>Before you begin, ensure you have the following prerequisites:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p>Python 3.6 or later installed on your system. You can download Python from <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>.</p></li>
+<li><p>Ensure <cite>pip</cite> (Python package installer) is available. If it’s not installed, you can follow the instructions at <a class="reference external" href="https://pip.pypa.io/en/stable/installation/">https://pip.pypa.io/en/stable/installation/</a>.</p></li>
 </ul>
+</section>
+<section id="step-by-step">
+<h4>Step by step 🐡<a class="headerlink" href="#step-by-step" title="Link to this heading">#</a></h4>
+<p><strong>Step 1: Locate the Package</strong></p>
+<p>Visit the <a class="reference external" href="https://github.com/kopyta/PUffy">GitHub repository</a> to find the latest release of Puffy.</p>
+<p><strong>Step 2: Choose a Release</strong></p>
+<p>Navigate to the “Releases” section and choose the version you want to install. You can find the releases at <a class="github reference external" href="https://github.com/kopyta/PUffy/releases">kopyta/PUffy</a>.</p>
+<p><strong>Step 3: Download the Package</strong></p>
+<p>&gt; <strong>Option 1: Wheel file (`.whl`)</strong></p>
+<p>Run the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://github.com/kopyta/PUffy/releases/v1.0/puffy-1.0-py3-none-any.whl
+pip<span class="w"> </span>install<span class="w"> </span>puffy-1.0-py3-none-any.whl
+</pre></div>
+</div>
+<p>&gt; <strong>Option 2: Tarball file (`.tar.gz`)</strong></p>
+<p>Run the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://github.com/kopyta/PUffy/releases/v1.0/puffy-1.0-py3-none-any.whl
+pip<span class="w"> </span>install<span class="w"> </span>puffy-1.0-py3-none-any.whl
+</pre></div>
+</div>
+<p><strong>Step 4: Congratulations</strong></p>
+<p>You’ve successfully installed Puffy! Get ready to embark on the exciting challenges of PU data classification. Enjoy exploring the capabilities of Puffy and make the most out of its features! For more information, visit our documentation: 🐡**Click**🐡 &lt;<a class="reference external" href="https://kopyta.github.io/PUffy/">https://kopyta.github.io/PUffy/</a>&gt;__</p>
+<p>Happy coding! 🚀</p>
+</section>
+</section>
+</section>
+<section id="indices">
+<h2>Indices<a class="headerlink" href="#indices" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p>
 </section>
 </section>
 
@@ -405,9 +439,17 @@ Puffy consists of four modules, namely labelling_methods, rn_methods, training a
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-puffy-s-documentation">Welcome to PUffy’s documentation!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-puffy-s-documentation">Welcome to PUffy’s Documentation!🐡</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents🐡</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-guide">User Guide🐡</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step">Step by step 🐡</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices">Indices</a></li>
 </ul>
   </nav></div>
 

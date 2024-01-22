@@ -377,10 +377,6 @@ for identification of reliable negatives - the first step in two-step classifica
 <dd class="field-odd"><p>Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]</p>
 </dd>
 </dl>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Raises a warninig, when all unlabeled instances are selected as reliable negatives.</p>
-</div>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.rn_methods</span> <span class="kn">import</span> <span class="n">RnMethods</span>
@@ -412,44 +408,26 @@ for identification of reliable negatives - the first step in two-step classifica
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.rn_methods.RnMethods.knn">
 <span class="sig-prename descclassname"><span class="pre">RnMethods.</span></span><span class="sig-name descname"><span class="pre">knn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/rn_methods.html#RnMethods.knn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.rn_methods.RnMethods.knn" title="Link to this definition">#</a></dt>
-<dd><p>Use k-Nearest Neighbors to identify reliable negatives.</p>
+<dd><p>Use k-Nearest Neighbors to identify reliable negatives, positives, and unlabeled examples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Input matrix of features.</p></li>
-<li><p><strong>y</strong> (<em>np.array</em>) – Indicator variable of positives.</p></li>
-<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable of labeled positives.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=5</em>) – Number of neighbors to consider.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em>) – Indicator variable for examples to be positive (1).</p></li>
+<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable for examples to be labeled (1 for positive, 0 for unlabeled).</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of neighbors to consider (default is 5).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A tuple of three DataFrames representing:
-- reliable negatives (rn)
-- labeled positives (p)
-- unlabeled instances(u)</p>
+- Reliable negatives (rn)
+- Positives (p)
+- Unlabeled (u)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.rn_methods</span> <span class="kn">import</span> <span class="n">RnMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">RnIdentifier</span> <span class="o">=</span> <span class="n">RnMethods</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="n">RnIdentifier</span><span class="o">.</span><span class="n">knn</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
-<span class="go">Fraction is 0.8991596638655462</span>
-<span class="go">a = -0.7500000000000258</span>
-</pre></div>
-</div>
-<p>KNN
-KNN: There were found 67 reliable negatives from 248 unlabeled instances</p>
 </dd></dl>
 
 </section>
@@ -458,51 +436,33 @@ KNN: There were found 67 reliable negatives from 248 unlabeled instances</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.rn_methods.RnMethods.spy">
 <span class="sig-prename descclassname"><span class="pre">RnMethods.</span></span><span class="sig-name descname"><span class="pre">spy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_treshhold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/rn_methods.html#RnMethods.spy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.rn_methods.RnMethods.spy" title="Link to this definition">#</a></dt>
-<dd><p>Identify reliable negatives using spy analysis.</p>
+<dd><p>Identify reliable negatives using a spy model. Returns reliable negatives, positives, and unlabeled examples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Input matrix of features.</p></li>
-<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable of labeled positives.</p></li>
-<li><p><strong>percent</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=15</em>) – Percentage of positive samples to act as spies.</p></li>
+<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable for examples to be labeled (1 for positive, 0 for unlabeled).</p></li>
+<li><p><strong>percent</strong> (<em>int</em><em>, </em><em>optional</em>) – Percentage of positive samples to act as spies (default is 15).</p></li>
 <li><p><strong>Returns</strong> – </p></li>
 <li><p><strong>-------</strong> – </p></li>
 <li><p><strong>Tuple</strong><strong>[</strong><strong>pd.DataFrame</strong> – A tuple of three DataFrames representing:
-- reliable negatives (rn)
-- labeled positives (p)
-- unlabeled instances (u)</p></li>
+- Reliable negatives (rn)
+- Positives (p)
+- Unlabeled (u)</p></li>
 <li><p><strong>pd.DataFrame</strong> – A tuple of three DataFrames representing:
-- reliable negatives (rn)
-- labeled positives (p)
-- unlabeled instances (u)</p></li>
+- Reliable negatives (rn)
+- Positives (p)
+- Unlabeled (u)</p></li>
 <li><p><strong>pd.DataFrame</strong><strong>]</strong> – A tuple of three DataFrames representing:
-- reliable negatives (rn)
-- labeled positives (p)
-- unlabeled instances (u)</p></li>
+- Reliable negatives (rn)
+- Positives (p)
+- Unlabeled (u)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>Tuple</em>[<em>DataFrame</em>, <em>DataFrame</em>, <em>DataFrame</em>]</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.rn_methods</span> <span class="kn">import</span> <span class="n">RnMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">RnIdentifier</span> <span class="o">=</span> <span class="n">RnMethods</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">RnIdentifier</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">show_threshold</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">Fraction is 0.8991596638655462</span>
-<span class="go">a = -0.7500000000000258</span>
-</pre></div>
-</div>
-<p>SPY
-SPY: There were found 206 reliable negatives from 248.0 unlabeled instances</p>
 </dd></dl>
 
 </section>
@@ -511,11 +471,11 @@ SPY: There were found 206 reliable negatives from 248.0 unlabeled instances</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.rn_methods.RnMethods.choose_spies">
 <span class="sig-prename descclassname"><span class="pre">RnMethods.</span></span><span class="sig-name descname"><span class="pre">choose_spies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/rn_methods.html#RnMethods.choose_spies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.rn_methods.RnMethods.choose_spies" title="Link to this definition">#</a></dt>
-<dd><p>Draw a given percentage of positive samples to act as spies.</p>
+<dd><p>Draw a given percentage of positive samples to act as spies. Returns new labels and spy indices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable of labeled positives.</p></li>
+<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable for examples to be labeled (1 for positive, 0 for unlabeled).</p></li>
 <li><p><strong>percent</strong> (<em>int</em>) – Percentage of positive samples to act as spies.</p></li>
 </ul>
 </dd>
@@ -604,25 +564,14 @@ SPY: There were found 206 reliable negatives from 248.0 unlabeled instances</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.rn_methods.RnMethods.convert_to_list">
 <span class="sig-prename descclassname"><span class="pre">RnMethods.</span></span><span class="sig-name descname"><span class="pre">convert_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/rn_methods.html#RnMethods.convert_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.rn_methods.RnMethods.convert_to_list" title="Link to this definition">#</a></dt>
-<dd><p>Convert the input to a Python list.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>a</strong> (<em>Union</em><em>[</em><em>list</em><em>, </em><em>pd.Series</em><em>, </em><em>int</em><em>, </em><em>float</em><em>, </em><em>str</em><em>, </em><em>tuple</em><em>, </em><em>np.ndarray</em><em>]</em>) – Input data to be converted.</p>
+<dd class="field-odd"><p><strong>a</strong> (<em>list</em><em> | </em><em>Series</em><em> | </em><em>int</em><em> | </em><em>float</em><em> | </em><em>str</em><em> | </em><em>tuple</em><em> | </em><em>ndarray</em>) – </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A Python list containing the converted values.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If <cite>a</cite> is a string that cannot be converted to an integer.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>List</em></p>
 </dd>
 </dl>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This function is designed to handle various input types, including lists, pandas Series, integers, floats, strings, tuples, and NumPy arrays. If the input type is not recognized, a warning will be printed, and the input will be returned as a single-element list.</p>
-</div>
 </dd></dl>
 
 </section>

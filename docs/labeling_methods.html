@@ -38,7 +38,6 @@
     <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labeling_methods';</script>
     <link rel="canonical" href="https://kopyta.github.io/PUffy/labeling_methods.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -350,24 +349,9 @@ to mimic positive-unlabeled labeling on funnly labeled dataset, using SCAR or SA
 <dl class="py class">
 <dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">puffy.labelling_methods.</span></span><span class="sig-name descname"><span class="pre">LabellingMethods</span></span><a class="reference internal" href="_modules/puffy/labelling_methods.html#LabellingMethods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods" title="Link to this definition">#</a></dt>
-<dd><p>Class containing methods for relabeling positive instances as unlabeled.
-The new labelling is stored as a new feature ‘s’, where labeled positives have a value ‘1’ and unlabeled instances have a value ‘0’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>probability</strong> (<em>int</em>) – Probability with which positive samples are selected for the new feature ‘s’.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods.probability">
-<span class="sig-name descname"><span class="pre">probability</span></span><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods.probability" title="Link to this definition">#</a></dt>
-<dd><p>Probability with which positive samples are selected to be labeled positives for the new feature ‘s’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
+<dd><p>Class containing methods for relabelling positive instances as unlabelled.</p>
+<p>The new labelling is stored as a new feature ‘s’, where positives have a value ‘1’
+and initially assumed unlabelled instances have a value ‘0’.</p>
 </dd></dl>
 
 <section id="scar">
@@ -375,37 +359,23 @@ The new labelling is stored as a new feature ‘s’, where labeled positives ha
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods.scar">
 <span class="sig-prename descclassname"><span class="pre">LabellingMethods.</span></span><span class="sig-name descname"><span class="pre">scar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/labelling_methods.html#LabellingMethods.scar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods.scar" title="Link to this definition">#</a></dt>
-<dd><p>Applies the SCAR assumption to select which positive instances are labeled positives and sets the rest as unlabeled, with the propensity score equal to label frequency.</p>
+<dd><p>Applies the SCAR method to relabel positive instances as unlabeled based on positive label frequency.</p>
+<p>The SCAR method chooses positive instances to be labeled as unlabeled based solely on the positive label frequency in the data.
+The sample is defined by the propensity score ‘c’, which is constant and equal to the positive label frequency.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>y</strong> (<em>pd.Series</em>) – Target variable containing the original labels.</p></li>
-<li><p><strong>probability</strong> (<em>float</em>) – Probability with which positive samples are selected for the new labeling.</p></li>
+<li><p><strong>probability</strong> (<em>float</em>) – Probability with which positive samples will be selected for the new labeling.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</p>
+<dd class="field-even"><p>Array containing the new labels for positive instances.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.array</p>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">scar</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after: </span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="go">Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="go">Last 10 labels of after: [0. 0. 1. 0. 0. 0. 0. 0. 0. 0.]</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </section>
@@ -414,45 +384,22 @@ The new labelling is stored as a new feature ‘s’, where labeled positives ha
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods.sar_sigmoid">
 <span class="sig-prename descclassname"><span class="pre">LabellingMethods.</span></span><span class="sig-name descname"><span class="pre">sar_sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/labelling_methods.html#LabellingMethods.sar_sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods.sar_sigmoid" title="Link to this definition">#</a></dt>
-<dd><p>Applies the SAR assumption with the propensity score function being a variant of standard logostic function.
-Selects which positive instances are labeled positives and sets the rest as unlabeled.</p>
+<dd><p>This method chooses positive instances to be labeled as unlabeled based on the attributes.
+Probability is calculated with sigmoid function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features.</p></li>
-<li><p><strong>y</strong> (<em>pd.Series</em>) – Target variable containing the original labels.</p></li>
+<li><p><strong>y</strong> (<em>pd.Series</em>) – Target variable.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</p>
+<dd class="field-even"><p>np.array containing the new labels for positive instances.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Numpy array</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>This method takes a variant of standard logostic function (denoted as <span class="math notranslate nohighlight">\(\sigma\)</span>) as the propensity score function:</p>
-<div class="math notranslate nohighlight">
-\[e(x) = \sigma(xb + a).\]</div>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display results</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after: </span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="go">Fraction is 1.0</span>
-<span class="go">a = -8.0</span>
-<span class="go">Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="go">Last 10 labels of after: [1. 1. 1. 0. 0. 0. 0. 0. 0. 1.]</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </section>
@@ -461,44 +408,22 @@ Selects which positive instances are labeled positives and sets the rest as unla
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods.sar_cauchy">
 <span class="sig-prename descclassname"><span class="pre">LabellingMethods.</span></span><span class="sig-name descname"><span class="pre">sar_cauchy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/labelling_methods.html#LabellingMethods.sar_cauchy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods.sar_cauchy" title="Link to this definition">#</a></dt>
-<dd><p>Applies the SAR assumption with the propensity score function being a cumulative distribution function for the standard Cauchy distribution.
-Selects which positive instances are labeled positives and sets the rest as unlabeled.</p>
+<dd><p>This method chooses positive instances to be labeled as unlabeled based on the attributes.
+Probability is calculated with Cauchy distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features.</p></li>
-<li><p><strong>y</strong> (<em>pd.Series</em>) – Target variable containing the original labels.</p></li>
+<li><p><strong>y</strong> (<em>pd.Series</em>) – Target variable.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</p>
+<dd class="field-even"><p>np.array containing the new labels for positive instances.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Numpy array</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>This method takes a cumulative distribution function for the standard Cauchy distribution (denoted as <span class="math notranslate nohighlight">\(F_C\)</span>) as the propensity score function:</p>
-<div class="math notranslate nohighlight">
-\[e(x) = F_{C}(xb + a).\]</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_cauchy</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after: </span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="go">Fraction is 0.9915966386554622</span>
-<span class="go">a = -3.550000000000016</span>
-<span class="go">Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="go">Last 10 labels of after: [1. 0. 1. 0. 0. 0. 0. 0. 0. 1.]</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </section>
@@ -507,44 +432,23 @@ Selects which positive instances are labeled positives and sets the rest as unla
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods.sar_lr_sigmoid">
 <span class="sig-prename descclassname"><span class="pre">LabellingMethods.</span></span><span class="sig-name descname"><span class="pre">sar_lr_sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/labelling_methods.html#LabellingMethods.sar_lr_sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods.sar_lr_sigmoid" title="Link to this definition">#</a></dt>
-<dd><p>Applies the SAR assumption with the propensity score function being a variant of standard logostic function with usage of coefficients granted by a logistic regression model trained on the dataset with known y.
-Selects which positive instances are labeled positives and sets the rest as unlabeled.</p>
+<dd><p>This method chooses positive instances to be labeled as unlabeled based on the attributes.
+Observations more closely positive class are assigned the label 1 with higher probability.
+Probability is calculated withsigmoid function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features.</p></li>
-<li><p><strong>y</strong> (<em>pd.Series</em>) – Target variable containing the original labels.</p></li>
+<li><p><strong>y</strong> (<em>pd.Series</em>) – Target variable.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</p>
+<dd class="field-even"><p>np.array containing the new labels for positive instances.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Numpy array</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>This method as the propensity score function takes a variant of standard logostic function (denoted as :math:’sigma’) with usage of coefficients granted by a logistic regression model trained on the dataset with known y (denoted as <span class="math notranslate nohighlight">\(\beta^*\)</span>):</p>
-<div class="math notranslate nohighlight">
-\[e(x) = \sigma(x \beta^* + a).\]</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last 10 labels after: </span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="go">Fraction is 0.49299719887955185</span>
-<span class="go">a = -5.0500000000000105</span>
-<span class="go">Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="go">Last 10 labels of after: [0. 0. 1. 0. 0. 0. 0. 0. 0. 0.]</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </section>
@@ -598,10 +502,7 @@ Selects which positive instances are labeled positives and sets the rest as unla
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labelling-methods-labellingmethods">labelling_methods.LabellingMethods</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.labelling_methods.LabellingMethods"><code class="docutils literal notranslate"><span class="pre">LabellingMethods</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.labelling_methods.LabellingMethods.probability"><code class="docutils literal notranslate"><span class="pre">LabellingMethods.probability</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.labelling_methods.LabellingMethods"><code class="docutils literal notranslate"><span class="pre">LabellingMethods</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scar">scar</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puffy.labelling_methods.LabellingMethods.scar"><code class="docutils literal notranslate"><span class="pre">LabellingMethods.scar()</span></code></a></li>
 </ul>

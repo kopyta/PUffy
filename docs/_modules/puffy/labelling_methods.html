@@ -339,78 +339,59 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for puffy.labelling_methods</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 
 
-<span class="n">A_NET</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="LabellingMethods">
 <a class="viewcode-back" href="../../labeling_methods.html#puffy.labelling_methods.LabellingMethods">[docs]</a>
 <span class="k">class</span> <span class="nc">LabellingMethods</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class containing methods for relabeling positive instances as unlabeled.</span>
-<span class="sd">    The new labelling is stored as a new feature &#39;s&#39;, where labeled positives have a value &#39;1&#39; and unlabeled instances have a value &#39;0&#39;.</span>
-<span class="sd">        </span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    probability : int</span>
-<span class="sd">        Probability with which positive samples are selected for the new feature &#39;s&#39;.</span>
+<span class="sd">    Class containing methods for relabelling positive instances as unlabelled.</span>
 
-<span class="sd">    Attributes</span>
-<span class="sd">    ----------</span>
-<span class="sd">    probability : int</span>
-<span class="sd">        Probability with which positive samples are selected to be labeled positives for the new feature &#39;s&#39;.</span>
+<span class="sd">    The new labelling is stored as a new feature &#39;s&#39;, where positives have a value &#39;1&#39; </span>
+<span class="sd">    and initially assumed unlabelled instances have a value &#39;0&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">a_net</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :param propability: probability with which positive samples are selected to be labeled positives for the new feature &#39;s&#39;.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        probability :  np.array</span>
+<span class="sd">            Probability with which positive samples will be selected for the new feature &#39;s&#39;.</span>
+<span class="sd">        a_net : np.array</span>
+<span class="sd">            Grid to search the best value a in SAR methods to come out on the right probability .</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">probability</span> <span class="o">=</span> <span class="n">probability</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a_net</span> <span class="o">=</span> <span class="n">a_net</span>
 
 
 <div class="viewcode-block" id="LabellingMethods.scar">
 <a class="viewcode-back" href="../../labeling_methods.html#puffy.labelling_methods.LabellingMethods.scar">[docs]</a>
     <span class="k">def</span> <span class="nf">scar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Applies the SCAR assumption to select which positive instances are labeled positives and sets the rest as unlabeled, with the propensity score equal to label frequency.</span>
+<span class="sd">        Applies the SCAR method to relabel positive instances as unlabeled based on positive label frequency.</span>
+
+<span class="sd">        The SCAR method chooses positive instances to be labeled as unlabeled based solely on the positive label frequency in the data.</span>
+<span class="sd">        The sample is defined by the propensity score &#39;c&#39;, which is constant and equal to the positive label frequency.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        y : pd.Series</span>
 <span class="sd">            Target variable containing the original labels.</span>
 <span class="sd">        probability : float</span>
-<span class="sd">            Probability with which positive samples are selected for the new labeling.</span>
+<span class="sd">            Probability with which positive samples will be selected for the new labeling.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        np.array</span>
-<span class="sd">            Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</span>
-<span class="sd">        </span>
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.5)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.scar(y)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels before: {list(y[-10:])}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after: {labels[-10:]}&quot;)</span>
-<span class="sd">        Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="sd">        Last 10 labels of after: [0. 0. 1. 0. 0. 0. 0. 0. 0. 0.]</span>
-<span class="sd">        </span>
+<span class="sd">            Array containing the new labels for positive instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
 
     
@@ -419,52 +400,27 @@ document.write(`
 <a class="viewcode-back" href="../../labeling_methods.html#puffy.labelling_methods.LabellingMethods.sar_sigmoid">[docs]</a>
     <span class="k">def</span> <span class="nf">sar_sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Applies the SAR assumption with the propensity score function being a variant of standard logostic function.</span>
-<span class="sd">        Selects which positive instances are labeled positives and sets the rest as unlabeled.</span>
+<span class="sd">        This method chooses positive instances to be labeled as unlabeled based on the attributes.</span>
+<span class="sd">        Probability is calculated with sigmoid function.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        X : pd.DataFrame</span>
 <span class="sd">            Features.</span>
 <span class="sd">        y : pd.Series</span>
-<span class="sd">            Target variable containing the original labels.</span>
+<span class="sd">            Target variable.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Numpy array</span>
-<span class="sd">            Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        ------</span>
-<span class="sd">        This method takes a variant of standard logostic function (denoted as :math:`\sigma`) as the propensity score function: \n</span>
-<span class="sd">        .. math:: e(x) = \sigma(xb + a).</span>
-<span class="sd">        </span>
-<span class="sd">        Example</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.9)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_sigmoid(X, y)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; # Display results</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels before: {list(y[-10:])}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after: {labels[-10:]}&quot;)</span>
-<span class="sd">        Fraction is 1.0</span>
-<span class="sd">        a = -8.0</span>
-<span class="sd">        Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="sd">        Last 10 labels of after: [1. 1. 1. 0. 0. 0. 0. 0. 0. 1.]</span>
-<span class="sd">            </span>
+<span class="sd">            np.array containing the new labels for positive instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">fractions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vectors are different lenght.&quot;</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A_NET</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_net</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -475,7 +431,7 @@ document.write(`
             <span class="n">f</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
             <span class="n">fractions</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">])</span>
         <span class="n">s</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fraction is </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fraction is </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
 
@@ -484,50 +440,27 @@ document.write(`
 <a class="viewcode-back" href="../../labeling_methods.html#puffy.labelling_methods.LabellingMethods.sar_cauchy">[docs]</a>
     <span class="k">def</span> <span class="nf">sar_cauchy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Applies the SAR assumption with the propensity score function being a cumulative distribution function for the standard Cauchy distribution.</span>
-<span class="sd">        Selects which positive instances are labeled positives and sets the rest as unlabeled.</span>
+<span class="sd">        This method chooses positive instances to be labeled as unlabeled based on the attributes.</span>
+<span class="sd">        Probability is calculated with Cauchy distribution.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        X : pd.DataFrame</span>
 <span class="sd">            Features.</span>
 <span class="sd">        y : pd.Series</span>
-<span class="sd">            Target variable containing the original labels.</span>
+<span class="sd">            Target variable.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Numpy array</span>
-<span class="sd">            Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        ------</span>
-<span class="sd">        This method takes a cumulative distribution function for the standard Cauchy distribution (denoted as :math:`F_C`) as the propensity score function:  \n</span>
-<span class="sd">        .. math:: e(x) = F_{C}(xb + a).</span>
-<span class="sd">        </span>
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.5)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_cauchy(X, y)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels before: {list(y[-10:])}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after: {labels[-10:]}&quot;)</span>
-<span class="sd">        Fraction is 0.9915966386554622</span>
-<span class="sd">        a = -3.550000000000016</span>
-<span class="sd">        Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="sd">        Last 10 labels of after: [1. 0. 1. 0. 0. 0. 0. 0. 0. 1.]</span>
+<span class="sd">            np.array containing the new labels for positive instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">fractions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vectors are different lenght.&quot;</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A_NET</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_net</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -538,7 +471,7 @@ document.write(`
             <span class="n">f</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
             <span class="n">fractions</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">])</span>
         <span class="n">s</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fraction is </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fraction is </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
 
@@ -547,43 +480,21 @@ document.write(`
 <a class="viewcode-back" href="../../labeling_methods.html#puffy.labelling_methods.LabellingMethods.sar_lr_sigmoid">[docs]</a>
     <span class="k">def</span> <span class="nf">sar_lr_sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Applies the SAR assumption with the propensity score function being a variant of standard logostic function with usage of coefficients granted by a logistic regression model trained on the dataset with known y.</span>
-<span class="sd">        Selects which positive instances are labeled positives and sets the rest as unlabeled.</span>
+<span class="sd">        This method chooses positive instances to be labeled as unlabeled based on the attributes.</span>
+<span class="sd">        Observations more closely positive class are assigned the label 1 with higher probability.</span>
+<span class="sd">        Probability is calculated withsigmoid function.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        X : pd.DataFrame</span>
 <span class="sd">            Features.</span>
 <span class="sd">        y : pd.Series</span>
-<span class="sd">            Target variable containing the original labels.</span>
+<span class="sd">            Target variable.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Numpy array</span>
-<span class="sd">            Array containing the new labels, where 1 denotes labeled positives and 0 unlabeled instances.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        ------</span>
-<span class="sd">        This method as the propensity score function takes a variant of standard logostic function (denoted as :math:&#39;\sigma&#39;) with usage of coefficients granted by a logistic regression model trained on the dataset with known y (denoted as :math:`\\beta^*`): \n</span>
-<span class="sd">        .. math:: e(x) = \sigma(x \\beta^* + a).</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.5)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_lr_sigmoid(X, y)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels before: {list(y[-10:])}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after: {labels[-10:]}&quot;)</span>
-<span class="sd">        Fraction is 0.49299719887955185</span>
-<span class="sd">        a = -5.0500000000000105</span>
-<span class="sd">        Last 10 labels before: [1, 1, 1, 0, 0, 0, 0, 0, 0, 1]</span>
-<span class="sd">        Last 10 labels of after: [0. 0. 1. 0. 0. 0. 0. 0. 0. 0.]</span>
+<span class="sd">            np.array containing the new labels for positive instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -591,7 +502,7 @@ document.write(`
         <span class="n">fractions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vectors are different lenght.&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A_NET</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_net</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -602,7 +513,7 @@ document.write(`
             <span class="n">f</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
             <span class="n">fractions</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">])</span>
         <span class="n">s</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fraction is </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fraction is </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">fractions</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
 </div>

@@ -349,7 +349,7 @@ iterative classification based on logistic regression - the second step in two-s
 <dl class="py class">
 <dt class="sig sig-object py" id="puffy.training.Train">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">puffy.training.</span></span><span class="sig-name descname"><span class="pre">Train</span></span><a class="reference internal" href="_modules/puffy/training.html#Train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.training.Train" title="Link to this definition">#</a></dt>
-<dd><p>Class for training logistic regression models.</p>
+<dd><p>Class for training logistic regression models using different methods.</p>
 </dd></dl>
 
 <section id="iterative-lr">
@@ -361,12 +361,12 @@ iterative classification based on logistic regression - the second step in two-s
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X_df</strong> (<em>pd.DataFrame</em>) – Features.</p></li>
-<li><p><strong>rn</strong> (<em>pd.DataFrame</em>) – Reliable negatives.</p></li>
-<li><p><strong>p</strong> (<em>pd.DataFrame</em>) – Labeled positives.</p></li>
-<li><p><strong>u</strong> (<em>pd.DataFrame</em>) – Unlabeled instances.</p></li>
-<li><p><strong>s_label</strong> (<em>np.array</em>) – Indicator variable of labeled positives.</p></li>
-<li><p><strong>epoch</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=12</em>) – Number of iterations.</p></li>
+<li><p><strong>X_df</strong> (<em>pd.DataFrame</em>) – Features dataframe.</p></li>
+<li><p><strong>rn</strong> (<em>pd.DataFrame</em>) – Reliable negatives dataframe.</p></li>
+<li><p><strong>p</strong> (<em>pd.DataFrame</em>) – Positives dataframe.</p></li>
+<li><p><strong>u</strong> (<em>pd.DataFrame</em>) – Unlabeled dataframe.</p></li>
+<li><p><strong>s_label</strong> (<em>np.array</em>) – Artificial PU labels</p></li>
+<li><p><strong>epoch</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of iterations (default is 12).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -376,36 +376,6 @@ iterative classification based on logistic regression - the second step in two-s
 <dd class="field-odd"><p>LogisticRegression</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.rn_methods</span> <span class="kn">import</span> <span class="n">RnMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.training</span> <span class="kn">import</span> <span class="n">Train</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">RnIdentifier</span> <span class="o">=</span> <span class="n">RnMethods</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="n">RnIdentifier</span><span class="o">.</span><span class="n">kmeans</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coach</span> <span class="o">=</span> <span class="n">Train</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">coach</span><span class="o">.</span><span class="n">iterative_LR</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">rn</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Start iterative training of logistic regression model.
-Stopping</p>
-<p>Training   RN    P    U
-0       340   66  321  182
-1       387  124  321  124
-2       445  141  321  107
-3       462  157  321   91
-4       478  161  321   87
-5       482  166  321   82
-6       487  172  321   76
-7       493  174  321   74
-8       495  174  321   74</p>
 </dd></dl>
 
 </section>
@@ -419,7 +389,7 @@ Stopping</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features dataframe.</p></li>
-<li><p><strong>s</strong> (<em>np.array</em>) – Indicator variable of labeled positives.</p></li>
+<li><p><strong>s</strong> (<em>np.array</em>) – Labels for the ‘s’ feature.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -429,24 +399,6 @@ Stopping</p>
 <dd class="field-odd"><p>LogisticRegression</p>
 </dd>
 </dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.rn_methods</span> <span class="kn">import</span> <span class="n">RnMethods</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">puffy.training</span> <span class="kn">import</span> <span class="n">Train</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Labeler</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">probability</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">Labeler</span><span class="o">.</span><span class="n">sar_lr_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">RnIdentifier</span> <span class="o">=</span> <span class="n">RnMethods</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="n">RnIdentifier</span><span class="o">.</span><span class="n">kmeans</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coach</span> <span class="o">=</span> <span class="n">Train</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">coach</span><span class="o">.</span><span class="n">naive_method</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </section>

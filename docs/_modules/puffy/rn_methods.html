@@ -349,8 +349,8 @@ document.write(`
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span><span class="n">List</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">numbers</span>
+<span class="kn">import</span> <span class="nn">itertools</span><span class="o">,</span> <span class="nn">numbers</span>
+
 
 <div class="viewcode-block" id="RnMethods">
 <a class="viewcode-back" href="../../rn_methods.html#puffy.rn_methods.RnMethods">[docs]</a>
@@ -362,28 +362,6 @@ document.write(`
 <div class="viewcode-block" id="RnMethods.convert_to_list">
 <a class="viewcode-back" href="../../rn_methods.html#puffy.rn_methods.RnMethods.convert_to_list">[docs]</a>
     <span class="k">def</span> <span class="nf">convert_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert the input to a Python list.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        a : Union[list, pd.Series, int, float, str, tuple, np.ndarray]</span>
-<span class="sd">            Input data to be converted.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        List</span>
-<span class="sd">            A Python list containing the converted values.</span>
-
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        ValueError</span>
-<span class="sd">            If `a` is a string that cannot be converted to an integer.</span>
-
-<span class="sd">        Warning</span>
-<span class="sd">        ---------</span>
-<span class="sd">        This function is designed to handle various input types, including lists, pandas Series, integers, floats, strings, tuples, and NumPy arrays. If the input type is not recognized, a warning will be printed, and the input will be returned as a single-element list.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)):</span>
             <span class="k">return</span> <span class="n">a</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">):</span>
@@ -470,10 +448,6 @@ document.write(`
 <span class="sd">            - reliable negatives (rn)</span>
 <span class="sd">            - labeled instances (p)</span>
 <span class="sd">            - unlabeled instances (u)</span>
-
-<span class="sd">        Warning</span>
-<span class="sd">        ---------</span>
-<span class="sd">        Raises a warninig, when all unlabeled instances are selected as reliable negatives.</span>
 
 <span class="sd">        Example</span>
 <span class="sd">        -------</span>
@@ -564,7 +538,7 @@ document.write(`
             
         <span class="k">if</span> <span class="n">cluster_counts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">min_ones_cluster</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
             <span class="n">min_ones_cluster</span> <span class="o">=</span> <span class="n">max_ones_cluster</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">raise</span> <span class="ne">Warning</span><span class="p">(</span><span class="s2">&quot;The found cluster contains all of the instances, all unlababled are considered reliable negatives&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Warning</span><span class="p">(</span><span class="s2">&quot;The found cluster contains all of the unlabeled instances, all unlabeled are considered reliable negatives&quot;</span><span class="p">)</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The chosen reliable negatives cluster is </span><span class="si">{</span><span class="n">min_ones_cluster</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">verbose</span> <span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cluster share in the whole dataset: &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">verbose</span> <span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
@@ -643,7 +617,7 @@ document.write(`
 <a class="viewcode-back" href="../../rn_methods.html#puffy.rn_methods.RnMethods.knn">[docs]</a>
     <span class="k">def</span> <span class="nf">knn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Use k-Nearest Neighbors to identify reliable negatives.</span>
+<span class="sd">        Use k-Nearest Neighbors to identify reliable negatives, positives, and unlabeled examples.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -651,40 +625,21 @@ document.write(`
 <span class="sd">            Input matrix of features.</span>
 
 <span class="sd">        y : np.array</span>
-<span class="sd">            Indicator variable of positives.</span>
+<span class="sd">            Indicator variable for examples to be positive (1).</span>
 
 <span class="sd">        s : np.array</span>
-<span class="sd">            Indicator variable of labeled positives.</span>
+<span class="sd">            Indicator variable for examples to be labeled (1 for positive, 0 for unlabeled).</span>
 
-<span class="sd">        k : int, optional, default=5</span>
-<span class="sd">            Number of neighbors to consider.</span>
+<span class="sd">        k : int, optional</span>
+<span class="sd">            Number of neighbors to consider (default is 5).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]</span>
 <span class="sd">            A tuple of three DataFrames representing:</span>
-<span class="sd">            - reliable negatives (rn)</span>
-<span class="sd">            - labeled positives (p)</span>
-<span class="sd">            - unlabeled instances(u)</span>
-
-<span class="sd">        Example</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.rn_methods import RnMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt;       </span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.9)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_lr_sigmoid(X,y)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; RnIdentifier = RnMethods()</span>
-<span class="sd">        &gt;&gt;&gt; rn,l,u = RnIdentifier.knn(X,y,labels)</span>
-<span class="sd">        Fraction is 0.8991596638655462</span>
-<span class="sd">        a = -0.7500000000000258</span>
-
-<span class="sd">        KNN</span>
-<span class="sd">        KNN: There were found 67 reliable negatives from 248 unlabeled instances</span>
+<span class="sd">            - Reliable negatives (rn)</span>
+<span class="sd">            - Positives (p)</span>
+<span class="sd">            - Unlabeled (u)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KNN&quot;</span><span class="p">)</span>
         <span class="n">X_copy</span> <span class="o">=</span> <span class="n">X</span>
@@ -719,7 +674,7 @@ document.write(`
         <span class="n">tn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">rn_y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">rn_s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
         <span class="n">fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">rn_y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">rn_s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KNN: There were found&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rn</span><span class="p">),</span> <span class="s2">&quot;reliable negatives from&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">U</span><span class="p">),</span> <span class="s2">&quot;unlabeled instances&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KNN: There were found&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rn</span><span class="p">),</span> <span class="s2">&quot;reliable negatives from&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">U</span><span class="p">),</span> <span class="s2">&quot;unlabeled&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">rn</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span></div>
 
@@ -728,12 +683,12 @@ document.write(`
 <a class="viewcode-back" href="../../rn_methods.html#puffy.rn_methods.RnMethods.choose_spies">[docs]</a>
     <span class="k">def</span> <span class="nf">choose_spies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">percent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw a given percentage of positive samples to act as spies.</span>
+<span class="sd">        Draw a given percentage of positive samples to act as spies. Returns new labels and spy indices.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        s : np.array</span>
-<span class="sd">            Indicator variable of labeled positives.</span>
+<span class="sd">            Indicator variable for examples to be labeled (1 for positive, 0 for unlabeled).</span>
 
 <span class="sd">        percent : int</span>
 <span class="sd">            Percentage of positive samples to act as spies.</span>
@@ -744,9 +699,6 @@ document.write(`
 <span class="sd">            A tuple containing:</span>
 <span class="sd">            - New labels with spies (spies)</span>
 <span class="sd">            - Indices of spy samples (cast_lots)</span>
-
-<span class="sd">        </span>
-<span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">num_of_spy</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">percent</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
 
@@ -763,7 +715,7 @@ document.write(`
 <a class="viewcode-back" href="../../rn_methods.html#puffy.rn_methods.RnMethods.spy">[docs]</a>
     <span class="k">def</span> <span class="nf">spy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">percent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">show_treshhold</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Identify reliable negatives using spy analysis.</span>
+<span class="sd">        Identify reliable negatives using a spy model. Returns reliable negatives, positives, and unlabeled examples.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -771,37 +723,18 @@ document.write(`
 <span class="sd">            Input matrix of features.</span>
 
 <span class="sd">        s : np.array</span>
-<span class="sd">            Indicator variable of labeled positives.</span>
+<span class="sd">            Indicator variable for examples to be labeled (1 for positive, 0 for unlabeled).</span>
 
-<span class="sd">        percent : int, optional, default=15</span>
-<span class="sd">            Percentage of positive samples to act as spies.</span>
+<span class="sd">        percent : int, optional</span>
+<span class="sd">            Percentage of positive samples to act as spies (default is 15).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">        -------</span>
 <span class="sd">        Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]</span>
 <span class="sd">            A tuple of three DataFrames representing:</span>
-<span class="sd">            - reliable negatives (rn)</span>
-<span class="sd">            - labeled positives (p)</span>
-<span class="sd">            - unlabeled instances (u)</span>
-
-<span class="sd">        Example</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.rn_methods import RnMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt;       </span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.9)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_lr_sigmoid(X,y)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; RnIdentifier = RnMethods()</span>
-<span class="sd">        &gt;&gt;&gt; rn, l, u = RnIdentifier.spy(X, labels, 10, show_threshold=False)</span>
-<span class="sd">        Fraction is 0.8991596638655462</span>
-<span class="sd">        a = -0.7500000000000258</span>
-
-<span class="sd">        SPY</span>
-<span class="sd">        SPY: There were found 206 reliable negatives from 248.0 unlabeled instances</span>
+<span class="sd">            - Reliable negatives (rn)</span>
+<span class="sd">            - Positives (p)</span>
+<span class="sd">            - Unlabeled (u)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SPY&quot;</span><span class="p">)</span>
         <span class="n">X_df</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -822,7 +755,7 @@ document.write(`
         <span class="n">unlabeled</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">X_df</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">X_df</span><span class="p">[</span><span class="s1">&#39;y_predict_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;y_predict_class&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">rn</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">X_df</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">X_df</span><span class="p">[</span><span class="s1">&#39;y_predict_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;y_predict_class&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SPY: There were found&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rn</span><span class="p">),</span> <span class="s2">&quot;reliable negatives from&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="s2">&quot;unlabeled instances&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SPY: There were found&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rn</span><span class="p">),</span> <span class="s2">&quot;reliable negatives from&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="s2">&quot;unlabeled&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rn</span><span class="p">,</span> <span class="n">positive</span><span class="p">,</span> <span class="n">unlabeled</span></div>
 </div>
 

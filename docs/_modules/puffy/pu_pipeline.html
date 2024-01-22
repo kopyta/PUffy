@@ -342,20 +342,16 @@ document.write(`
 <span></span><span class="kn">from</span> <span class="nn">puffy.rn_methods</span> <span class="kn">import</span> <span class="n">RnMethods</span>
 <span class="kn">from</span> <span class="nn">puffy.labelling_methods</span> <span class="kn">import</span> <span class="n">LabellingMethods</span>
 <span class="kn">from</span> <span class="nn">puffy.training</span> <span class="kn">import</span> <span class="n">Train</span>
-
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">balanced_accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">balanced_accuracy_score</span><span class="p">,</span><span class="n">f1_score</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
-
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
 
 
 <span class="n">RN_METHODS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spy&#39;</span><span class="p">,</span> <span class="s1">&#39;knn&#39;</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">]</span>
@@ -371,26 +367,21 @@ document.write(`
 <span class="sd">        - spy, knn and kmeans for identification of reliable negatives</span>
 <span class="sd">        - logistic regression as a classifier</span>
 <span class="sd">        - balanced accuracy and F1 score as evaluation metrics</span>
-<span class="sd">    </span>
-<span class="sd">    Attributes</span>
-<span class="sd">    ----------</span>
-<span class="sd">    X : pd.DataFrame</span>
-<span class="sd">        Features of the training set.</span>
-<span class="sd">    y : np.array</span>
-<span class="sd">        Target variable of the training set.</span>
-<span class="sd">    Xtest : pd.DataFrame</span>
-<span class="sd">        Features of the test set.</span>
-<span class="sd">    ytest : np.array</span>
-<span class="sd">        Target variable of the test set.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">ytest</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the ProcessPipeline class.</span>
 
-<span class="sd">        :param X: Features of the training set.</span>
-<span class="sd">        :param y: Target variable of the training set.</span>
-<span class="sd">        :param Xtest: Features of the test set.</span>
-<span class="sd">        :param ytest: Target variable of the test set.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : pd.DataFrame</span>
+<span class="sd">            Features of the training set.</span>
+<span class="sd">        y : np.array</span>
+<span class="sd">            Target variable of the training set.</span>
+<span class="sd">        Xtest : pd.DataFrame</span>
+<span class="sd">            Features of the test set.</span>
+<span class="sd">        ytest : np.array</span>
+<span class="sd">            Target variable of the test set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span>
@@ -401,60 +392,25 @@ document.write(`
 
 <div class="viewcode-block" id="ProcessPipeline.run_labelling">
 <a class="viewcode-back" href="../../pu_pipeline.html#puffy.pu_pipeline.ProcessPipeline.run_labelling">[docs]</a>
-    <span class="k">def</span> <span class="nf">run_labelling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prob</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">run_labelling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prob</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Run labelling methods to relabel certain positive instances as unlabeled.</span>
+<span class="sd">        Run labelling methods to generate new labels for positive instances.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        prob : int</span>
-<span class="sd">            Probability with which positive samples are selected for the new labeling.</span>
+<span class="sd">            Probability with which positive samples will be selected for the new label.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        Tuple[np.array, np.array, np.array, np.array]</span>
+<span class="sd">        Tuple[np.array, np.array]</span>
 <span class="sd">            Tuple of arrays containing the new labels generated by SCAR and SAR methods.</span>
 
 <span class="sd">            - s_scar: np.array</span>
 <span class="sd">                Array of labels generated by the SCAR method.</span>
-<span class="sd">            - s_sar_sigma: np.array</span>
-<span class="sd">                Array of labels generated by the SAR method, with propensity score function being a logistic sigmoid function.</span>
-<span class="sd">            - s_sar_cauchy: np.array</span>
-<span class="sd">                Array of labels generated by the SAR method, with propensity score function being a CDF of Cauchy distribution.</span>
-<span class="sd">            - s_lr_sigma: np.array</span>
-<span class="sd">                Array of labels generated by the SAR method, with propensity score function being a logistic sigmoid function combined with logistic regression&#39;s coefficients.</span>
-
-<span class="sd">        Example</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test,X,y]]</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; pipeline = ProcessPipeline(X_train,y_train,X_test,y_test)</span>
-<span class="sd">        &gt;&gt;&gt; s_scar, s_sar_sigma, s_lr_sigma, s_sar_cauchy = pipeline.run_labelling(0.5)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels before: {list(y_train[-10:])}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after SCAR: {s_scar[-10:]}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after SAR (sigmoid logistic function): {s_sar_sigma[-10:]}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after SAR (CDF Cauchy): {s_sar_cauchy[-10:]}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Last 10 labels after SAR (sigmoid lf + logistic regression): {s_lr_sigma[-10:]}&quot;)</span>
-<span class="sd">        Fraction is 1.0</span>
-<span class="sd">        a = -8.0</span>
-<span class="sd">        Fraction is 0.993006993006993</span>
-<span class="sd">        a = -6.850000000000004</span>
-<span class="sd">        Fraction is 0.9020979020979021</span>
-<span class="sd">        a = -0.5000000000000266</span>
-
-<span class="sd">        Last 10 labels before: [0, 0, 1, 0, 1, 1, 1, 1, 0, 1]</span>
-<span class="sd">        Last 10 labels after SCAR: [0 0 1 0 1 1 1 1 0 0]</span>
-<span class="sd">        Last 10 labels after SAR (sigmoid logistic function): [0. 0. 1. 0. 1. 1. 1. 1. 0. 1.]</span>
-<span class="sd">        Last 10 labels after SAR (CDF Cauchy): [0. 0. 1. 0. 1. 1. 1. 1. 0. 1.]</span>
-<span class="sd">        Last 10 labels after SAR (sigmoid lf + logistic regression ): [0. 0. 0. 0. 1. 1. 1. 1. 0. 1.]</span>
+<span class="sd">            - s_sar: np.array</span>
+<span class="sd">                Array of labels generated by the SAR method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">labelling</span> <span class="o">=</span> <span class="n">LabellingMethods</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
@@ -471,12 +427,12 @@ document.write(`
 <a class="viewcode-back" href="../../pu_pipeline.html#puffy.pu_pipeline.ProcessPipeline.run_rn_methods">[docs]</a>
     <span class="k">def</span> <span class="nf">run_rn_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">rn_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Run reliable negatives identification methods (first step of the two-step methods) based on the specified type.</span>
+<span class="sd">        Run reliable negatives identification method based on the specified type.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        s : np.array</span>
-<span class="sd">            Indicator variable of labeled positives.</span>
+<span class="sd">            Array of labels for positive instances.</span>
 <span class="sd">        rn_type : str</span>
 <span class="sd">            Type of method for identifying reliable negatives (&#39;spy&#39;, &#39;knn&#39;, &#39;kmeans&#39;).</span>
 
@@ -488,30 +444,9 @@ document.write(`
 <span class="sd">            - rn: DataFrame</span>
 <span class="sd">                DataFrame representing reliable negatives.</span>
 <span class="sd">            - p: DataFrame</span>
-<span class="sd">                DataFrame representing labeled positives.</span>
+<span class="sd">                DataFrame representing positive partitions.</span>
 <span class="sd">            - u: DataFrame</span>
-<span class="sd">                DataFrame representing unlabeled instances.</span>
-<span class="sd">        Example</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt;        </span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</span>
-<span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.9)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_lr_sigmoid(X_train, y_train)</span>
-<span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; pipeline = ProcessPipeline(X_train, y_train, X_test, y_test)</span>
-<span class="sd">        &gt;&gt;&gt; rn, l, u = pipeline.run_rn_methods(labels, &#39;spy&#39;)</span>
-<span class="sd">        Fraction is 0.8986013986013986</span>
-<span class="sd">        a = -0.5000000000000266</span>
-<span class="sd">        SPY</span>
-<span class="sd">        Treshhold is 0.1457053196376031</span>
-<span class="sd">        SPY: There were found 159 reliable negatives from 198.0 unlabeled instances</span>
+<span class="sd">                DataFrame representing unlabeled partitions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">rn_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RN_METHODS</span><span class="p">:</span>
@@ -540,43 +475,19 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        rn: DataFrame</span>
-<span class="sd">            DataFrame representing reliable negatives.</span>
-<span class="sd">        p: DataFrame</span>
-<span class="sd">            DataFrame representing labeled positives.</span>
-<span class="sd">        u: DataFrame</span>
-<span class="sd">            DataFrame representing unlabeled instances.</span>
+<span class="sd">        rn : pd.DataFrame</span>
+<span class="sd">            DataFrame representing the reliable negatives.</span>
+<span class="sd">        p : pd.DataFrame</span>
+<span class="sd">            DataFrame representing the positive partitions.</span>
+<span class="sd">        u : pd.DataFrame</span>
+<span class="sd">            DataFrame representing the unlabeled partitions.</span>
 <span class="sd">        s : np.array</span>
-<span class="sd">            Indicator variable of labeled positives.</span>
+<span class="sd">            Array of labels for positive instances.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        LogisticRegression</span>
 <span class="sd">            Trained logistic regression model.</span>
-<span class="sd">        Example</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt;        </span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</span>
-<span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.9)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_lr_sigmoid(X_train, y_train)</span>
-<span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; pipeline = ProcessPipeline(X_train, y_train, X_test, y_test)</span>
-<span class="sd">        &gt;&gt;&gt; rn, l, u = pipeline.run_rn_methods(labels, &#39;spy&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; model = pipeline.run_training(rn,l,u,labels)</span>
-<span class="sd">        Fraction is 0.8986013986013986</span>
-<span class="sd">        a = -0.5000000000000266</span>
-<span class="sd">        SPY</span>
-<span class="sd">        Treshhold is 0.1457053196376031</span>
-<span class="sd">        SPY: There were found 159 reliable negatives from 198.0 unlabeled instances</span>
-<span class="sd">        Start iterative training of logistic regression model.</span>
-<span class="sd">        Stopping</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">training</span> <span class="o">=</span> <span class="n">Train</span><span class="p">()</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">training</span><span class="o">.</span><span class="n">iterative_LR</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">rn</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">show_results_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -604,37 +515,6 @@ document.write(`
 <span class="sd">                Balanced accuracy score.</span>
 <span class="sd">            - f: float</span>
 <span class="sd">                F1 score.</span>
-<span class="sd">        Example</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline</span>
-<span class="sd">        &gt;&gt;&gt; from puffy.labelling_methods import LabellingMethods</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">        &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">        &gt;&gt;&gt;        </span>
-<span class="sd">        &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</span>
-<span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; Labeler = LabellingMethods(probability=0.9)</span>
-<span class="sd">        &gt;&gt;&gt; labels = Labeler.sar_lr_sigmoid(X_train, y_train)</span>
-<span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; pipeline = ProcessPipeline(X_train, y_train, X_test, y_test)</span>
-<span class="sd">        &gt;&gt;&gt; rn, l, u = pipeline.run_rn_methods(labels, &#39;spy&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; model = pipeline.run_training(rn,l,u,labels)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; ba, f1 = pipeline.run_metrics(model)</span>
-<span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Achieved balanced accuracy: {ba}&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; print(f&quot;Achieved F1 score: {f1}&quot;)</span>
-<span class="sd">        Fraction is 0.8986013986013986</span>
-<span class="sd">        a = -0.5000000000000266</span>
-<span class="sd">        SPY</span>
-<span class="sd">        Treshhold is 0.1457053196376031</span>
-<span class="sd">        SPY: There were found 159 reliable negatives from 198.0 unlabeled instances</span>
-<span class="sd">        Start iterative training of logistic regression model.</span>
-<span class="sd">        Stopping</span>
-<span class="sd">        Achived balanced accuracy: 0.9394038650507697</span>
-<span class="sd">        Achived F1 score: 0.9583333333333334</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ypred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Xtest</span><span class="p">)</span>
         <span class="n">balanced_accuracy</span> <span class="o">=</span> <span class="n">balanced_accuracy_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ytest</span><span class="p">,</span> <span class="n">ypred</span><span class="p">)</span>
@@ -648,41 +528,6 @@ document.write(`
 <a class="viewcode-back" href="../../pu_pipeline.html#puffy.pu_pipeline.create_result_df">[docs]</a>
 <span class="k">def</span> <span class="nf">create_result_df</span><span class="p">(</span><span class="n">data_frames</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Combine and structure results from different scenarios into a summary DataFrame.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    -----------</span>
-<span class="sd">    data_frames : list of pandas.DataFrame</span>
-<span class="sd">        A list containing four DataFrames with results for different scenarios. Each DataFrame should have columns &#39;Balanced accuracy&#39;, &#39;F1 score&#39;, and &#39;time&#39;.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    --------</span>
-<span class="sd">    pd.DataFrame</span>
-<span class="sd">        A summary DataFrame containing the merged results for each scenario. The columns have a multi-level index with the first level representing the scenario (&#39;SCAR&#39;, &#39;SAR_SIGMA&#39;, &#39;SAR_LR_SIGMA&#39;, &#39;SAR_CAUCHY&#39;) and the second level representing the metric (&#39;Balanced accuracy&#39;, &#39;F1 score&#39;, &#39;time&#39;).</span>
-
-<span class="sd">    Example</span>
-<span class="sd">    -------</span>
-<span class="sd">    &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline, rn_method_result, create_result_df</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; process = ProcessPipeline(X_train, y_train, X_test, y_test)</span>
-<span class="sd">    &gt;&gt;&gt; labelings = process.run_labelling(0.9)</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; df = []</span>
-<span class="sd">    &gt;&gt;&gt; for s in labelings:</span>
-<span class="sd">    ...     df_s = pd.DataFrame(rn_method_result(process, &#39;kmeans&#39;, s), columns=[&#39;Balanced accuracy&#39;, &#39;F1 score&#39;, &#39;time&#39;],</span>
-<span class="sd">    ...                         index=[&#39;Kmeans + LR&#39;, &#39;Kmeans + Iterative LR&#39;])</span>
-<span class="sd">    ...     df.append(df_s)</span>
-<span class="sd">    ... </span>
-<span class="sd">    &gt;&gt;&gt; create_result_df(df)</span>
-<span class="sd">    # The function will display the summary table.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result_df</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data_frames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_frames</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data_frames</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_frames</span><span class="p">[</span><span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">result_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="s1">&#39;SCAR&#39;</span><span class="p">,</span> <span class="s1">&#39;Balanced accuracy&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;SCAR&#39;</span><span class="p">,</span> <span class="s1">&#39;F1 score&#39;</span><span class="p">),(</span><span class="s1">&#39;SCAR&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">),</span> 
                                                         <span class="p">(</span><span class="s1">&#39;SAR_SIGMA&#39;</span><span class="p">,</span> <span class="s1">&#39;Balanced accuracy&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;SAR_SIGMA&#39;</span><span class="p">,</span> <span class="s1">&#39;F1 score&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;SAR_SIGMA&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">),</span>
@@ -695,50 +540,7 @@ document.write(`
 <a class="viewcode-back" href="../../pu_pipeline.html#puffy.pu_pipeline.oracle_naive_method_result">[docs]</a>
 <span class="k">def</span> <span class="nf">oracle_naive_method_result</span><span class="p">(</span><span class="n">pu_process</span><span class="p">:</span> <span class="n">ProcessPipeline</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute performance metrics for the Oracle or Naive method.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    -----------</span>
-<span class="sd">    pu_process : ProcessPipeline</span>
-<span class="sd">        An instance of the Positive-Unlabeled learning pipeline containing training and testing data.</span>
-
-<span class="sd">    type : str</span>
-<span class="sd">        The type of method to compute results for. Should be either &quot;ORACLE&quot; or &quot;NAIVE&quot;.</span>
-
-<span class="sd">    s_array : np.array or None</span>
-<span class="sd">        Indicator variable of labeled positives.</span>
-
-
-<span class="sd">    Returns</span>
-<span class="sd">    --------</span>
-<span class="sd">    list[float, float, float]</span>
-<span class="sd">        A list containing the computed Balanced Accuracy, F1 Score, and elapsed time for the specified method.</span>
-
-<span class="sd">    Example</span>
-<span class="sd">    ---------</span>
-<span class="sd">    &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline, oracle_naive_method_result</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">    &gt;&gt;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test,X,y]]</span>
-<span class="sd">    &gt;&gt;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; process = ProcessPipeline(X_train, y_train, X_test, y_test)</span>
-<span class="sd">    &gt;&gt;&gt; s_scar = process.run_labelling(0.9)[0]</span>
-<span class="sd">    &gt;&gt;&gt; oracle = oracle_naive_method_result(process, &quot;ORACLE&quot;, None)</span>
-<span class="sd">    &gt;&gt;&gt; naive = oracle_naive_method_result(process, &quot;NAIVE&quot;, s_scar)</span>
-<span class="sd">    Fraction is 1.0</span>
-<span class="sd">    a = -8.0</span>
-<span class="sd">    Fraction is 0.993006993006993</span>
-<span class="sd">    a = 3.0499999999999616</span>
-<span class="sd">    Fraction is 0.8986013986013986</span>
-<span class="sd">    a = -0.400000000000027</span>
-<span class="sd">    ORACLE METHOD: balanced accuracy: 0.9464461185718964, f1 score: 0.9655172413793103, run time: 0.016235828399658203</span>
-<span class="sd">    NAIVE METHOD: balanced accuracy: 0.9439895185063871, f1 score: 0.9577464788732394, run time: 0.01611614227294922</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span><span class="s2">&quot;ORACLE&quot;</span><span class="p">:</span>
@@ -756,54 +558,6 @@ document.write(`
 <div class="viewcode-block" id="rn_method_result">
 <a class="viewcode-back" href="../../pu_pipeline.html#puffy.pu_pipeline.rn_method_result">[docs]</a>
 <span class="k">def</span> <span class="nf">rn_method_result</span><span class="p">(</span><span class="n">pu_process</span><span class="p">,</span> <span class="n">rn_type</span><span class="p">,</span> <span class="n">s_array</span><span class="p">):</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute performance metrics for a two-step method for positive-unlabeled data.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    -----------</span>
-<span class="sd">    pu_process : ProcessPipeline</span>
-<span class="sd">        An instance of the Positive-Unlabeled learning pipeline containing training and testing data.</span>
-
-<span class="sd">    rn_type : str</span>
-<span class="sd">        The type of the two-step method to use. Options:&#39;knn&#39;, &#39;kmeans&#39;, &#39;spy&#39;.</span>
-
-<span class="sd">    s_array : np.array</span>
-<span class="sd">        Indicator variable of labeled positives.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    --------</span>
-<span class="sd">    list[list[float, float, float], list[float, float, float]]</span>
-<span class="sd">        A list containing two sublists. Each sublist represents the performance metrics (Balanced Accuracy, F1 Score, Elapsed Time) for the simple and iterative versions of the RN method, respectively.</span>
-
-<span class="sd">    Example</span>
-<span class="sd">    ---------</span>
-<span class="sd">    &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline, rn_method_result</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; process = ProcessPipeline(X_train, y_train, X_test, y_test)</span>
-<span class="sd">    &gt;&gt;&gt; s_scar = process.run_labelling(0.9)[0]</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; results = rn_method_result(process, &#39;knn&#39;, s_scar)</span>
-<span class="sd">    &gt;&gt;&gt; results</span>
-<span class="sd">    Fraction is 1.0</span>
-<span class="sd">    a = -8.0</span>
-<span class="sd">    Fraction is 0.993006993006993</span>
-<span class="sd">    a = -6.550000000000005</span>
-<span class="sd">    Fraction is 0.8986013986013986</span>
-<span class="sd">    a = -0.950000000000025</span>
-<span class="sd">    KNN</span>
-<span class="sd">    KNN: There were found 39 reliable negatives from 193 unlabeled instances</span>
-<span class="sd">    Start iterative training of logistic regression model.</span>
-<span class="sd">    Stopping</span>
-<span class="sd">    [[0.6976744186046512, 0.8452380952380951, 0.11298465728759766],</span>
-<span class="sd">    [0.8953488372093024, 0.9403973509933775, 0.3631479740142822]]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">rn</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">pu_process</span><span class="o">.</span><span class="n">run_rn_methonds</span><span class="p">(</span><span class="n">s_array</span><span class="p">,</span> <span class="n">rn_type</span><span class="p">)</span>
 
@@ -828,7 +582,8 @@ document.write(`
 <span class="k">def</span> <span class="nf">launch</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">ytest</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">prob</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="p">:</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Launch the entire pipeline, including  various labelling, various identification of reliable negatives methods, training methods and evaluation.</span>
+<span class="sd">    Launch the entire pipeline, including  various labelling, various identification of reliable negatives methods,</span>
+<span class="sd">    various training methods, and evaluation.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -841,36 +596,12 @@ document.write(`
 <span class="sd">    ytest : pd.DataFrame</span>
 <span class="sd">        Target variable of the test set.</span>
 <span class="sd">    prob : int</span>
-<span class="sd">        Probability with which positive samples are selected for the new labels.</span>
+<span class="sd">        Probability with which positive samples will be selected for the new label.</span>
 
 <span class="sd">    Returns</span>
-<span class="sd">    ----------</span>
+<span class="sd">    -------</span>
 <span class="sd">    pd.DataFrame</span>
 <span class="sd">        Dataframe containing the results of the entire process.</span>
-
-<span class="sd">    Example</span>
-<span class="sd">    ---------</span>
-<span class="sd">    &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline, launch</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; results = launch(X_train, y_train, X_test, y_test, 0.8)</span>
-<span class="sd">    &gt;&gt;&gt; results</span>
-<span class="sd">    # A dataframe of the results is displayed (here presenting only a part of it)</span>
-<span class="sd">                                 SAR_CAUCHY                       </span>
-<span class="sd">                        Balanced accuracy  F1 score       time  </span>
-<span class="sd">    Oracle methods                 0.946446  0.965517   0.054124  </span>
-<span class="sd">    Naive method                   0.958074  0.972222   0.031616  </span>
-<span class="sd">    Spy + LR                       0.958074  0.972222   0.583345  </span>
-<span class="sd">    Spy + Iterative LR             0.934818  0.958904   0.637402  </span>
-<span class="sd">    KNN + LR                       0.767442  0.876543   0.077034  </span>
-<span class="sd">    KNN + Iterative LR             0.895349  0.940397   0.278719  </span>
-<span class="sd">    Kmeans + LR                    0.883721  0.934211  29.737121  </span>
-<span class="sd">    Kmeans + Iterative LR          0.895349  0.940397  29.851906 </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dfs</span><span class="o">=</span><span class="p">[]</span>
     <span class="n">process</span> <span class="o">=</span> <span class="n">ProcessPipeline</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">,</span> <span class="n">ytest</span><span class="p">)</span>
@@ -899,7 +630,7 @@ document.write(`
 <a class="viewcode-back" href="../../pu_pipeline.html#puffy.pu_pipeline.count_results">[docs]</a>
 <span class="k">def</span> <span class="nf">count_results</span><span class="p">(</span><span class="n">df_X</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df_y</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">test_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prob</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Counts and prints results for multiple experiments with different test splits and label frequencies.</span>
+<span class="sd">    Counts and prints results for multiple experiments with different test splits and propensity scores.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -908,27 +639,12 @@ document.write(`
 <span class="sd">    df_y : pd.DataFrame</span>
 <span class="sd">        Target variable.</span>
 <span class="sd">    test_size : float</span>
-<span class="sd">        Size of the test set (value from 0 to 1).</span>
+<span class="sd">        Size of the test set.</span>
 <span class="sd">    test_num : int</span>
 <span class="sd">        Number of experiments.</span>
 <span class="sd">    prob : list[float]</span>
-<span class="sd">        List of label frequencies.</span>
-<span class="sd">    flag : bool, default=False</span>
-<span class="sd">        If False, each DataFrame contains mean results, if True  each DataFrame contains mean and standard deviation of the results of each method.</span>
+<span class="sd">        List of propensity scores.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    --------</span>
-<span class="sd">    Tuple</span>
-<span class="sd">        A tuple containing DataFrames with the results of each method for different label frequencies. Each DataFrame contains aggregated results (mean and optional standard deviation if &#39;flag&#39; is True).</span>
-
-<span class="sd">    Example</span>
-<span class="sd">    ---------</span>
-<span class="sd">    &gt;&gt;&gt; from puffy.pu_pipeline import count_results, plot_performance</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; result_counts = count_results(X, y, 0.3, 2, [0.3, 0.6, 0.9])</span>
-<span class="sd">    # result_counts is a tuple containing DataFrames with aggregated results for each label frequency.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prob</span><span class="p">))]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_num</span><span class="p">):</span>
@@ -937,7 +653,7 @@ document.write(`
         <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prob</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RESULTS FOR A LABEL FREQUENCY </span><span class="si">{</span><span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RESULTS FOR PROPENSITY SCORE </span><span class="si">{</span><span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">scores</span> <span class="o">=</span> <span class="n">launch</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">,</span> <span class="n">ytest</span><span class="p">,</span> <span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
             <span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)):</span>
@@ -959,9 +675,9 @@ document.write(`
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    df_X : pd.DataFrame</span>
-<span class="sd">        Features of the training set.</span>
+<span class="sd">        Features.</span>
 <span class="sd">    df_y : pd.DataFrame</span>
-<span class="sd">        Target variable of the training set.</span>
+<span class="sd">        Target variable.</span>
 <span class="sd">    df_Xtest : pd.DataFrame</span>
 <span class="sd">        Features for the test set.</span>
 <span class="sd">    df_ytest : pd.DataFrame</span>
@@ -969,33 +685,14 @@ document.write(`
 <span class="sd">    test_num : int</span>
 <span class="sd">        Number of experiments.</span>
 <span class="sd">    prob : list[Float]</span>
-<span class="sd">        List of label frequencies.</span>
-<span class="sd">    flag : bool, default=False</span>
-<span class="sd">        If False, each DataFrame contains mean results, if True  each DataFrame contains mean and standard deviation of the results of each method.</span>
+<span class="sd">        List of propensity scores.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    --------</span>
-<span class="sd">    Tuple</span>
-<span class="sd">        A tuple containing DataFrames with the results of each method for different label frequencies. Each DataFrame contains aggregated results (mean and optional standard deviation if &#39;flag&#39; is True).</span>
-
-<span class="sd">    Example</span>
-<span class="sd">    ---------</span>
-<span class="sd">    &gt;&gt;&gt; from puffy.pu_pipeline import ProcessPipeline, count_results_without_splitting_dataset</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import train_test_split</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
-<span class="sd">    &gt;&gt;&gt; X_train, X_test, y_train, y_test, X, y = [df.reset_index(drop=True) for df in [X_train, X_test, y_train, y_test, X, y]]</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; count_results_without_splitting_dataset(X_train, y_train, X_test, y_test, 1, [0.5, 0.9])</span>
-<span class="sd">    # Returns a tuple containing DataFrames with aggregated results for each label frequency.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prob</span><span class="p">))]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_num</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EXPERIMENT NR </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prob</span><span class="p">)):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RESULTS FOR A LABEL FREQUENCY </span><span class="si">{</span><span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RESULTS FOR PROPENSITY SCORE </span><span class="si">{</span><span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">scores</span> <span class="o">=</span> <span class="n">launch</span><span class="p">(</span><span class="n">df_X</span><span class="p">,</span> <span class="n">df_y</span><span class="p">,</span> <span class="n">df_Xtest</span><span class="p">,</span> <span class="n">df_ytest</span><span class="p">,</span> <span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
             <span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
 
@@ -1013,45 +710,13 @@ document.write(`
 <a class="viewcode-back" href="../../pu_pipeline.html#puffy.pu_pipeline.plot_performance">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_performance</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span> <span class="n">c_seq</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mechanism</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">iterative</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots the performance of different methods given performance results.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    results : list[pd.DataFrame]</span>
-<span class="sd">        List of DataFrames containing performance results.</span>
-<span class="sd">    c_seq : np.ndarray</span>
-<span class="sd">        Label frequency sequence.</span>
-<span class="sd">    metrics : str</span>
-<span class="sd">        Metric to plot, possible values: &#39;Balanced accuracy&#39;, &#39;F1 score&#39;.</span>
-<span class="sd">    mechanism : str</span>
-<span class="sd">        Labeling mechanism assumption, possible values: &#39;SCAR&#39;, &#39;SAR&#39;.</span>
-<span class="sd">    dataset : str</span>
-<span class="sd">        Dataset name.</span>
-<span class="sd">    iterative : bool, optional</span>
-<span class="sd">        If True, removes iterative LR methods from the plot. Default is True.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    None</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -------</span>
-<span class="sd">    Works with functions puffy.pu_pipeline.count_results_without_splitting_dataset and puffy.pu_pipeline.count_results, if the &#39;flag&#39; is True.</span>
-
-<span class="sd">    Shows a plot of method&#39;s performaces</span>
-
-<span class="sd">    Example</span>
-<span class="sd">    ---------</span>
-<span class="sd">    &gt;&gt;&gt; from puffy.pu_pipeline import count_results, plot_performance</span>
-<span class="sd">    &gt;&gt;&gt; from sklearn.datasets import load_breast_cancer</span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; X, y = load_breast_cancer(as_frame=True, return_X_y=True)</span>
-<span class="sd">    &gt;&gt;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; result_counts = count_results(X, y, 0.3, 2, [0.3, 0.6, 0.9],flag=True)</span>
-<span class="sd">    &gt;&gt;&gt; plot_performance(result_counts, [0.3, 0.6, 0.9])</span>
-<span class="sd">    # Plots the methods&#39; performance</span>
+<span class="sd">    Function to plot methods&#39; performance given:</span>
+<span class="sd">    - performance results list</span>
+<span class="sd">    - label frequency sequence</span>
+<span class="sd">    - metrics - possible values: &#39;Balanced accuracy&#39;, &#39;F1 score&#39;</span>
+<span class="sd">    - label mechanism - possible values: &#39;SCAR&#39;, &#39;SAR&#39;</span>
+<span class="sd">    - dataset name</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">results_cp</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">iterative</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)):</span>
