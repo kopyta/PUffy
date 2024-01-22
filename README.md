@@ -29,3 +29,5 @@ As of today, the package is meant for binary classification problems.
 
 ## Documentation
 Full documentation is available here: [**I'm here!**](https://kopyta.github.io/PUffy/)
+##
+The package is a result of the bachelor's thesis, origining from [this repository](https://github.com/zuzannakotlinska/PU_data_classification
