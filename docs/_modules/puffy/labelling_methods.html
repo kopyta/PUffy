@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>puffy.labelling_methods &#8212; PUClassifierKit 1.0.0 documentation</title>
+    <title>puffy.labelling_methods &#8212; PUffy 1.0.0 documentation</title>
   
   
   
@@ -38,6 +38,7 @@
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/puffy/labelling_methods';</script>
+    <link rel="canonical" href="https://kopyta.github.io/PUffy/_modules/puffy/labelling_methods.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -112,7 +113,7 @@
   
   
   
-    <p class="title logo__title">PUClassifierKit 1.0.0 documentation</p>
+    <p class="title logo__title">PUffy 1.0.0 documentation</p>
   
 </a></div>
     
@@ -352,9 +353,7 @@ document.write(`
 <span class="k">class</span> <span class="nc">LabellingMethods</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class containing methods for relabeling positive instances as unlabeled.</span>
-
-<span class="sd">    The new labelling is stored as a new feature &#39;s&#39;, where labeled positives have a value &#39;1&#39; </span>
-<span class="sd">    and unlabeled instances have a value &#39;0&#39;.</span>
+<span class="sd">    The new labelling is stored as a new feature &#39;s&#39;, where labeled positives have a value &#39;1&#39; and unlabeled instances have a value &#39;0&#39;.</span>
 <span class="sd">        </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -379,8 +378,7 @@ document.write(`
 <a class="viewcode-back" href="../../labeling_methods.html#puffy.labelling_methods.LabellingMethods.scar">[docs]</a>
     <span class="k">def</span> <span class="nf">scar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Applies the SCAR assumption to select which positive instances are labeled positives and sets the rest as unlabeled, </span>
-<span class="sd">        with the propensity score equal to label frequency.</span>
+<span class="sd">        Applies the SCAR assumption to select which positive instances are labeled positives and sets the rest as unlabeled, with the propensity score equal to label frequency.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -654,7 +652,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2024, Zuzanna Kotlińska, Nikola Miszalska, Agata Kopyt.
+      © Copyright 2024, Agata Kopyt, Zuzanna Kotlińska, Nikola Miszalska.
       <br/>
     
   </p>

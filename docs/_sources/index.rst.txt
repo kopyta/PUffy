@@ -30,16 +30,15 @@ So far, it offers:
 
 As of today, the package is meant for binary classification problems.
 
-
+Contents
+============================================
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
 
    labeling_methods
    rn_methods
    training
    pu_pipeline
-
 
 Indices and tables
 ==================

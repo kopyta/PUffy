@@ -1,5 +1,9 @@
 pu_pipeline 
 ----------------------------------------------------------------------------------------------------
+This is a documentation of module `pu_pipeline` of PUffy package. This module collects the necessary tools 
+to perform training and evaluation of two-step classification model on PU data - given fully labeled data.
+It also provides comparison to naive and oracle models and can plot the performance.
+
 pu_pipeline.ProcessPipeline 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: puffy.pu_pipeline.ProcessPipeline
@@ -13,10 +17,7 @@ run_rn_methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. automethod:: puffy.pu_pipeline.ProcessPipeline.run_rn_methods
 
-oracle_naive_method_result
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. autofunction:: puffy.pu_pipeline.oracle_naive_method_result
-    
+   
 run_training
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. automethod:: puffy.pu_pipeline.ProcessPipeline.run_training
@@ -24,6 +25,10 @@ run_training
 run_metrics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. automethod:: puffy.pu_pipeline.ProcessPipeline.run_metrics
+
+oracle_naive_method_result
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. autofunction:: puffy.pu_pipeline.oracle_naive_method_result
 
 launch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

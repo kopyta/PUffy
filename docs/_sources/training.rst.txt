@@ -1,5 +1,8 @@
 training 
 ----------------------------------------------------------------------------------------------------
+This is a documentation of module `training` of PUffy package. This module collects tools to train the model by performing
+iterative classification based on logistic regression - the second step in two-step classification.
+
 training.Train 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: puffy.training.Train

@@ -1,5 +1,8 @@
 rn_methods 
 ----------------------------------------------------------------------------------------------------
+This is a documentation of module `rn_methods` of PUffy package. This module collects the necessary tools 
+for identification of reliable negatives - the first step in two-step classification.
+
 rn_methods.RnMethods 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: puffy.rn_methods.RnMethods

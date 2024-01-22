@@ -343,14 +343,15 @@ document.write(`
                   
   <section id="labelling-methods">
 <h1>labelling_methods<a class="headerlink" href="#labelling-methods" title="Link to this heading">#</a></h1>
+<p>This is a documentation of module <cite>labelling_methods</cite> of PUffy package. This module collects the necessary tools
+to mimic positive-unlabeled labeling on funnly labeled dataset, using SCAR or SAR assumption.</p>
 <section id="labelling-methods-labellingmethods">
 <h2>labelling_methods.LabellingMethods<a class="headerlink" href="#labelling-methods-labellingmethods" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">puffy.labelling_methods.</span></span><span class="sig-name descname"><span class="pre">LabellingMethods</span></span><a class="reference internal" href="_modules/puffy/labelling_methods.html#LabellingMethods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods" title="Link to this definition">#</a></dt>
-<dd><p>Class containing methods for relabeling positive instances as unlabeled.</p>
-<p>The new labelling is stored as a new feature ‘s’, where labeled positives have a value ‘1’
-and unlabeled instances have a value ‘0’.</p>
+<dd><p>Class containing methods for relabeling positive instances as unlabeled.
+The new labelling is stored as a new feature ‘s’, where labeled positives have a value ‘1’ and unlabeled instances have a value ‘0’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>probability</strong> (<em>int</em>) – Probability with which positive samples are selected for the new feature ‘s’.</p>
@@ -374,8 +375,7 @@ and unlabeled instances have a value ‘0’.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="puffy.labelling_methods.LabellingMethods.scar">
 <span class="sig-prename descclassname"><span class="pre">LabellingMethods.</span></span><span class="sig-name descname"><span class="pre">scar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/puffy/labelling_methods.html#LabellingMethods.scar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#puffy.labelling_methods.LabellingMethods.scar" title="Link to this definition">#</a></dt>
-<dd><p>Applies the SCAR assumption to select which positive instances are labeled positives and sets the rest as unlabeled,
-with the propensity score equal to label frequency.</p>
+<dd><p>Applies the SCAR assumption to select which positive instances are labeled positives and sets the rest as unlabeled, with the propensity score equal to label frequency.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

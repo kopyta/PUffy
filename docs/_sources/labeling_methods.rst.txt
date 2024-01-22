@@ -1,5 +1,8 @@
 labelling_methods 
 ----------------------------------------------------------------------------------------------------
+This is a documentation of module `labelling_methods` of PUffy package. This module collects the necessary tools 
+to mimic positive-unlabeled labeling on funnly labeled dataset, using SCAR or SAR assumption.
+
 labelling_methods.LabellingMethods 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. autoclass:: puffy.labelling_methods.LabellingMethods
