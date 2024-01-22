@@ -65,7 +65,7 @@ wget https://github.com/kopyta/PUffy/releases/v1.0/puffy-1.0-py3-none-any.whl
 pip install puffy-1.0-py3-none-any.whl
 ```
 or
-### Option 2: Tarball file (`.tar.gz`)
+#### Option 2: Tarball file (`.tar.gz`)
 Run the following commands:
 ```bash
 wget https://github.com/kopyta/PUffy/releases/v1.0/puffy-1.0.tar.gz
