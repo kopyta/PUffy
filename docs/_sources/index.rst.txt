@@ -87,11 +87,12 @@ Run the following commands:
 
 **Step 4: Congratulations**
 
-You've successfully installed Puffy! Get ready to embark on the exciting challenges of PU data classification. Enjoy exploring the capabilities of Puffy and make the most out of its features! For more information, visit our documentation: 🐡**Click**🐡 <https://kopyta.github.io/PUffy/>__
+You've successfully installed Puffy! Get ready to embark on the exciting challenges of PU data classification. Enjoy exploring the capabilities of Puffy and make the most out of its features! For more information, visit our documentation: `🐡**Click**🐡 <https://kopyta.github.io/PUffy/>`__
 
 Happy coding! 🚀
 
 ===================
+
 The package is a result of the bachelor's thesis, originating from this repository `https://github.com/zuzannakotlinska/PU_data_classification <https://github.com/zuzannakotlinska/PU_data_classification>`__.
 
 Indices 
